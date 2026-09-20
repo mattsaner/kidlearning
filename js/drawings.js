@@ -4,11 +4,11 @@
 // and the spoken name are automatic) and `d` (an SVG path).
 
 const r2 = (n) => Math.round(n * 100) / 100;
-const poly = (...pts) => `M${pts.map((p) => p.join(' ')).join('L')}Z`;
-const rect = (x, y, w, h) => poly([x, y], [x + w, y], [x + w, y + h], [x, y + h]);
-const ellipse = (cx, cy, rx, ry) =>
+export const poly = (...pts) => `M${pts.map((p) => p.join(' ')).join('L')}Z`;
+export const rect = (x, y, w, h) => poly([x, y], [x + w, y], [x + w, y + h], [x, y + h]);
+export const ellipse = (cx, cy, rx, ry) =>
   `M${cx - rx} ${cy}a${rx} ${ry} 0 1 0 ${2 * rx} 0a${rx} ${ry} 0 1 0 ${-2 * rx} 0Z`;
-const circle = (cx, cy, r) => ellipse(cx, cy, r, r);
+export const circle = (cx, cy, r) => ellipse(cx, cy, r, r);
 const polar = (cx, cy, r, a) => [r2(cx + r * Math.cos(a)), r2(cy + r * Math.sin(a))];
 const band = (cx, cy, ro, ri) =>
   `M${cx - ro} ${cy}A${ro} ${ro} 0 0 1 ${cx + ro} ${cy}L${cx + ri} ${cy}A${ri} ${ri} 0 0 0 ${cx - ri} ${cy}Z`;

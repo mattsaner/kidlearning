@@ -30,3 +30,6 @@ Only use files you may legally redistribute: CC0, public domain, CC BY or CC BY-
 
 ## Releasing
 Bump `VERSION` in `js/version.js` (and `Version` in `SBOM.md`, `version` in `sbom.cdx.json`), commit and push to `main`. The *Release* workflow then creates the GitHub release `vX.Y.Z` with generated notes, a zip of the game and the SBOM. The *Deploy to GitHub Pages* workflow publishes the site.
+
+## Body parts
+The bear is defined in `js/bodyparts.js`: `BODY_PARTS` holds the names (en/fr/de, with the article), `BODY_REGIONS` the tappable shapes in painter's order, and `FIND_POOL` the parts asked in *Find it*. Keep shapes large: small hands.

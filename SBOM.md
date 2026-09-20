@@ -6,14 +6,14 @@ Its only third-party *content* is 12 animal sound recordings (below). This docum
 Machine-readable [CycloneDX 1.5](https://cyclonedx.org/) version: [`sbom.cdx.json`](sbom.cdx.json) (includes SHA-256 checksums and license links).
 There is no video in the project.
 
-_Last reviewed: 2026-09-20 · Version: 1.2.4_
+_Last reviewed: 2026-09-20 · Version: 1.3.0_
 
 ## 1. Application and first-party content
 
 | Component | License | Notes |
 | --- | --- | --- |
 | kidlearning code (HTML / CSS / JavaScript ES modules, no build step) | [MIT](LICENSE) | © 2026 Matthieu Saner |
-| Word lists, translations (EN / FR / DE) and the line drawings (`js/data.js`, `js/drawings.js`) | MIT | Written for this project |
+| Word lists, translations (EN / FR / DE), the line drawings and the body-parts bear (`js/data.js`, `js/drawings.js`, `js/bodyparts.js`) | MIT | Written for this project |
 | App icons (`assets/icons/icon.svg` and the PNGs rendered from it) | MIT | Own vector artwork (a bear drawn with shapes); no emoji glyphs or third-party images |
 
 ## 2. Third-party media: animal sounds (`assets/audio/cries/*.mp3`)

@@ -8,6 +8,7 @@ import { startFindIt } from './games/findit.js';
 import { startSounds } from './games/sounds.js';
 import { startPaint, thumbnail } from './games/paint.js';
 import { DRAWINGS } from './drawings.js';
+import { startBody } from './games/body.js';
 import { playtime, startPlaytime, fmt } from './playtime.js';
 
 const app = document.getElementById('app');
@@ -37,6 +38,8 @@ function home() {
       );
     }
     grid.append(
+      el('button', { class: 'tile', type: 'button', onpress: () => { speak(t().body); bodyScreen(); } },
+        el('span', { class: 'tile-icon' }, '🧸'), el('span', { class: 'tile-label' }, t().body)),
       el('button', { class: 'tile', type: 'button', onpress: () => { speak(t().draw); drawingChooser(); } },
         el('span', { class: 'tile-icon' }, '🖍️'), el('span', { class: 'tile-label' }, t().draw))
     );
@@ -62,6 +65,21 @@ function categoryScreen(cat) {
     }
     s.append(grid);
   }, { back: home });
+}
+
+function bodyScreen() {
+  show((s) => {
+    const grid = el('div', { class: 'menu' });
+    for (const m of [{ icon: '👆', label: t().explore, mode: 'explore' }, { icon: '🔍', label: t().findit, mode: 'find' }]) {
+      grid.append(el('button', { class: 'tile', type: 'button', onpress: () => bodyGame(m.mode) },
+        el('span', { class: 'tile-icon' }, m.icon), el('span', { class: 'tile-label' }, m.label)));
+    }
+    s.append(grid);
+  }, { back: home });
+}
+
+function bodyGame(mode) {
+  show((s) => startBody(s, mode), { back: bodyScreen });
 }
 
 function drawingChooser() {
