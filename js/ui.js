@@ -53,13 +53,13 @@ export function replayAnimation(node, cls) {
   node.classList.add(cls);
 }
 
-export function confetti(origin) {
+export function confetti(origin, count = 22) {
   const layer = el('div', { class: 'confetti' });
   const emojis = ['🎉', '⭐', '✨', '🎈', '💛', '🌈'];
   const rect = origin?.getBoundingClientRect?.() || { left: innerWidth / 2, top: innerHeight / 2, width: 0, height: 0 };
   const cx = rect.left + rect.width / 2;
   const cy = rect.top + rect.height / 2;
-  for (let i = 0; i < 22; i++) {
+  for (let i = 0; i < count; i++) {
     const angle = Math.random() * Math.PI * 2;
     const dist = 90 + Math.random() * 180;
     layer.append(el('span', {

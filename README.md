@@ -12,9 +12,10 @@ Built for a 20‑month‑old: giant tap targets, spoken words, cheerful animatio
 | --- | --- |
 | 👆 **Explore** | Tap a picture: it bounces, and the word is spoken and shown in large letters. For **animals**, the first tap shows a pulsing 🔊 badge meaning "tap again to hear the cry"; the second tap has the voice say the animal's cry ("Ouaf ouaf !", "Meuh !") and resets. |
 | 🔊 **Sounds** (animals only) | Tap an animal to hear a **real recording** of its sound, with the written cry as caption. The fish makes a bubbly "blub blub" (fish are silent). |
+| 🖍️ **Drawing** | Pick a line drawing (sun, house, flower, fish, apple, rainbow) and scribble with a finger or Apple Pencil. The **color is automatic**: it depends on the region under the pen and changes by itself when crossing into another region, and the color's name is spoken. Paint stays inside the lines, and a region that is about half scribbled fills in completely. Colour everything for a celebration. Hold the 🗑️ button for 1 s to start over. |
 | 🔍 **Find it!** | The game says "Find the dog!" and shows 2–4 pictures. Right answer → confetti. Wrong answer → a gentle wobble and the prompt repeats. |
 
-Categories: 🎨 Colors · 🐶 Animals · 🍎 Fruits & veggies · 🔢 Numbers & shapes
+Categories: 🖍️ Drawing (own tile on the home screen) · 🎨 Colors · 🐶 Animals · 🍎 Fruits & veggies · 🔢 Numbers & shapes
 
 ### Toddler-proof touch handling
 Little hands press hard, hold, slide and rest a palm on the screen, so the game reacts the moment a finger **touches** a picture (no clean "tap" needed) and blocks pinch-zoom, double-tap zoom, text selection and long-press menus (also on iPad, where Safari ignores \`user-scalable=no\`). Scrolling with one finger still works.
@@ -83,7 +84,8 @@ js/data.js          all words (en / fr / de) and languages
 js/i18n.js          UI strings + saved settings
 js/speech.js        text-to-speech / custom audio
 js/ui.js            DOM helpers, confetti, hold-to-open button
-js/games/           Explore, Find-it and Sounds modes
+js/games/           Explore, Find-it, Sounds and Drawing (paint.js) modes
+js/drawings.js      the line drawings to colour
 sw.js, manifest…    offline / installable app
 ```
 

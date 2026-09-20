@@ -6,6 +6,8 @@ import { VERSION, BUILD } from './version.js';
 import { startExplore } from './games/explore.js';
 import { startFindIt } from './games/findit.js';
 import { startSounds } from './games/sounds.js';
+import { startPaint, thumbnail } from './games/paint.js';
+import { DRAWINGS } from './drawings.js';
 
 const app = document.getElementById('app');
 let cleanup = null;
@@ -33,6 +35,10 @@ function home() {
         }, el('span', { class: 'tile-icon' }, cat.icon), el('span', { class: 'tile-label' }, cat.names[settings.lang]))
       );
     }
+    grid.append(
+      el('button', { class: 'tile', type: 'button', onpress: () => { speak(t().draw); drawingChooser(); } },
+        el('span', { class: 'tile-icon' }, '🖍️'), el('span', { class: 'tile-label' }, t().draw))
+    );
     s.append(grid, holdButton('⚙️', 1500, openSettings, t().holdHint),
       el('div', { class: 'version' }, `v${VERSION} · ${BUILD}`));
   });
@@ -55,6 +61,23 @@ function categoryScreen(cat) {
     }
     s.append(grid);
   }, { back: home });
+}
+
+function drawingChooser() {
+  show((s) => {
+    const grid = el('div', { class: 'grid drawings' });
+    for (const d of DRAWINGS) {
+      grid.append(el('button', {
+        class: 'card', type: 'button', 'aria-label': d.names.en,
+        onpress: () => { speak(d.names[settings.lang]); paintScreen(d); },
+      }, thumbnail(d)));
+    }
+    s.append(grid);
+  }, { back: home });
+}
+
+function paintScreen(drawing) {
+  show((s) => startPaint(s, drawing), { back: drawingChooser });
 }
 
 function gameScreen(cat, run) {
