@@ -1,0 +1,99 @@
+import { CATEGORIES, LANGUAGES } from './data.js';
+import { settings, loadSettings, saveSettings, t } from './i18n.js';
+import { el, holdButton } from './ui.js';
+import { speak } from './speech.js';
+import { startExplore } from './games/explore.js';
+import { startFindIt } from './games/findit.js';
+
+const app = document.getElementById('app');
+let cleanup = null;
+
+function show(build, { back } = {}) {
+  cleanup?.();
+  cleanup = null;
+  window.speechSynthesis?.cancel();
+  const screen = el('main', { class: 'screen' });
+  if (back) {
+    screen.append(el('button', { class: 'back', type: 'button', 'aria-label': t().back, onclick: back }, '⬅️'));
+  }
+  app.replaceChildren(screen);
+  cleanup = build(screen) || null;
+}
+
+function home() {
+  show((s) => {
+    const grid = el('div', { class: 'menu' });
+    for (const cat of CATEGORIES) {
+      grid.append(
+        el('button', {
+          class: 'tile', type: 'button',
+          onclick: () => { speak(cat.names[settings.lang]); categoryScreen(cat); },
+        }, el('span', { class: 'tile-icon' }, cat.icon), el('span', { class: 'tile-label' }, cat.names[settings.lang]))
+      );
+    }
+    s.append(grid, holdButton('⚙️', 1500, openSettings, t().holdHint));
+  });
+}
+
+function categoryScreen(cat) {
+  show((s) => {
+    const modes = [
+      { icon: '👆', label: t().explore, run: startExplore },
+      { icon: '🔍', label: t().findit, run: startFindIt },
+    ];
+    const grid = el('div', { class: 'menu' });
+    for (const m of modes) {
+      grid.append(
+        el('button', { class: 'tile', type: 'button', onclick: () => gameScreen(cat, m.run) },
+          el('span', { class: 'tile-icon' }, m.icon), el('span', { class: 'tile-label' }, m.label))
+      );
+    }
+    s.append(grid);
+  }, { back: home });
+}
+
+function gameScreen(cat, run) {
+  show((s) => run(s, cat), { back: () => categoryScreen(cat) });
+}
+
+function openSettings() {
+  const dlg = el('dialog', { class: 'settings' });
+  const render = () => {
+    dlg.replaceChildren(
+      el('h2', {}, t().settings),
+      el('h3', {}, t().language),
+      el('div', { class: 'row' }, ...LANGUAGES.map((l) =>
+        el('button', {
+          type: 'button', class: `chip${settings.lang === l.id ? ' on' : ''}`,
+          onclick: () => { settings.lang = l.id; saveSettings(); render(); },
+        }, `${l.flag} ${l.label}`))),
+      el('h3', {}, t().sound),
+      el('div', { class: 'row' },
+        el('button', {
+          type: 'button', class: `chip${settings.sound ? ' on' : ''}`,
+          onclick: () => { settings.sound = !settings.sound; saveSettings(); render(); },
+        }, settings.sound ? '🔊 ON' : '🔇 OFF')),
+      el('h3', {}, t().choices),
+      el('div', { class: 'row' }, ...[2, 3, 4].map((n) =>
+        el('button', {
+          type: 'button', class: `chip${settings.choices === n ? ' on' : ''}`,
+          onclick: () => { settings.choices = n; saveSettings(); render(); },
+        }, String(n)))),
+      el('button', {
+        type: 'button', class: 'chip close',
+        onclick: () => { dlg.close(); dlg.remove(); home(); },
+      }, t().close)
+    );
+  };
+  render();
+  dlg.addEventListener('cancel', () => { dlg.remove(); home(); });
+  document.body.append(dlg);
+  dlg.showModal();
+}
+
+loadSettings();
+home();
+
+if ('serviceWorker' in navigator && location.protocol.startsWith('http')) {
+  navigator.serviceWorker.register('sw.js').catch(() => {});
+}
