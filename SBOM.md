@@ -6,7 +6,7 @@ Its only third-party *content* is 12 animal sound recordings (below). This docum
 Machine-readable [CycloneDX 1.5](https://cyclonedx.org/) version: [`sbom.cdx.json`](sbom.cdx.json) (includes SHA-256 checksums and license links).
 There is no video in the project.
 
-_Last reviewed: 2026-09-20 · Version: 1.2.2_
+_Last reviewed: 2026-09-20 · Version: 1.2.3_
 
 ## 1. Application and first-party content
 
@@ -61,7 +61,7 @@ The MIT license of the code does **not** cover these recordings; they keep the l
 
 ## 4. Browser platform APIs used
 
-Web Speech API (`speechSynthesis`), `localStorage` (settings, play time), Service Worker + Web App Manifest (offline, "Add to Home Screen"), Pointer Events, Canvas 2D, `<dialog>`, CSS Grid, ES modules.
+Web Speech API (`speechSynthesis`), Web Audio API (animal recordings), `localStorage` (settings, play time), Service Worker + Web App Manifest (offline, "Add to Home Screen"), Pointer Events, Canvas 2D, `<dialog>`, CSS Grid, ES modules.
 
 ## 5. Build and deploy tooling (not shipped)
 

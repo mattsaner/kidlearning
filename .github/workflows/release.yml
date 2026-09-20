@@ -1,0 +1,38 @@
+name: Release
+
+# Creates a GitHub release (tag vX.Y.Z) whenever the version in js/version.js changes.
+# Bump VERSION in js/version.js (and SBOM.md / sbom.cdx.json), push to main, done.
+
+on:
+  push:
+    branches: [main]
+    paths: [js/version.js]
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Create the release if this version has none yet
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          VERSION=$(sed -n "s/.*VERSION = '\(.*\)';.*/\1/p" js/version.js)
+          TAG="v$VERSION"
+          if [ -z "$VERSION" ]; then echo "Could not read VERSION"; exit 1; fi
+          if gh release view "$TAG" >/dev/null 2>&1; then
+            echo "$TAG already released, nothing to do"
+            exit 0
+          fi
+          zip -qr "kidlearning-$VERSION.zip" index.html css js assets manifest.webmanifest sw.js LICENSE
+          gh release create "$TAG" \
+            --target "$GITHUB_SHA" \
+            --title "Kid Learning $VERSION" \
+            --notes "Play it: https://${GITHUB_REPOSITORY_OWNER}.github.io/${GITHUB_REPOSITORY#*/}/ (the live site shows the version and commit at the bottom left of the home screen)." \
+            --generate-notes \
+            "kidlearning-$VERSION.zip" sbom.cdx.json

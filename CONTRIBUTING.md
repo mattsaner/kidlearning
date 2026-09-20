@@ -27,3 +27,6 @@ Drawings live in `js/drawings.js` as a list of regions in a 100 x 100 box. Each 
 
 ## Adding third-party media (sounds, images, fonts)
 Only use files you may legally redistribute: CC0, public domain, CC BY or CC BY-SA, with a clear origin. Never use NonCommercial ("NC") or "NoDerivatives" files, files whose origin is unclear, or files copied from commercial libraries. Check the license on the source page (not only the uploader's claim). Then add the file to `assets/audio/cries/sources.json` (author, license, changes, SHA-256), and update `assets/audio/cries/CREDITS.md`, `SBOM.md` and `sbom.cdx.json`. The in-app credits screen reads `sources.json`.
+
+## Releasing
+Bump `VERSION` in `js/version.js` (and `Version` in `SBOM.md`, `version` in `sbom.cdx.json`), commit and push to `main`. The *Release* workflow then creates the GitHub release `vX.Y.Z` with generated notes, a zip of the game and the SBOM. The *Deploy to GitHub Pages* workflow publishes the site.

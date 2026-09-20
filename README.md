@@ -96,6 +96,10 @@ js/drawings.js      the line drawings to colour
 sw.js, manifest…    offline / installable app
 ```
 
+## Releases
+
+Each version is published in the repository's **Releases** section (tag `vX.Y.Z`) with generated notes, a zip of the game and the SBOM. See [CONTRIBUTING.md](CONTRIBUTING.md#releasing).
+
 ## Checking a deployment
 
 The home screen shows a tiny, faint label at the bottom-left, like `v1.0.0 · 14eedf5 2026-09-20`: the version, the deployed commit and the build date. Compare it with `git log -1 --short` to confirm the latest push is live (locally it shows `dev`). Bump `VERSION` in `js/version.js` for releases; the commit and date are stamped automatically by the workflow.
