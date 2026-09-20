@@ -1,43 +1,69 @@
 # Software Bill of Materials (SBOM)
 
-Kid Learning is intentionally **dependency-free**: no npm packages, no CDN scripts, no web fonts, no analytics, no ads, no network calls at runtime. This document lists everything the project is built from or relies on.
+Kid Learning has **no third-party code**: no npm packages, no CDN scripts, no web fonts, no analytics, no ads and no network calls at runtime.
+Its only third-party *content* is 12 animal sound recordings (below). This document lists everything the project is built from or relies on, and how each license is respected.
 
-A machine-readable [CycloneDX 1.5](https://cyclonedx.org/) version is in [`sbom.cdx.json`](sbom.cdx.json).
+Machine-readable [CycloneDX 1.5](https://cyclonedx.org/) version: [`sbom.cdx.json`](sbom.cdx.json) (includes SHA-256 checksums and license links).
+There is no video in the project.
 
-_Last reviewed: 2026-09-20 · Version: 1.2.1_
+_Last reviewed: 2026-09-20 · Version: 1.2.2_
 
-## 1. Application
+## 1. Application and first-party content
 
-| Component | Type | License | Notes |
-| --- | --- | --- | --- |
-| kidlearning (this repo) | application | [MIT](LICENSE) | Vanilla HTML / CSS / JavaScript (ES modules), no build step |
-
-## 2. Runtime dependencies (shipped to the browser)
-
-**None.** No third-party code is bundled or loaded.
-
-Content that is not code:
-
-| Item | Source | License / terms |
+| Component | License | Notes |
 | --- | --- | --- |
-| Emoji pictures (animals, fruit, shapes) | Rendered by the user's operating system / browser emoji font | Governed by the OS font vendor; not redistributed by this repo |
-| Word lists and translations (EN / FR / DE) | Written for this project (`js/data.js`) | MIT |
-| App icon (`assets/icons/icon.svg`) | Written for this project; uses a 🐻 emoji glyph rendered by the OS | MIT |
-| Animal cries (`assets/audio/cries/*.mp3`) | Recordings from Wikimedia Commons, adapted (trimmed, converted); see [credits](assets/audio/cries/CREDITS.md) | CC0, public domain, CC BY 3.0, CC BY-SA 3.0 / 4.0 (per file). BY / BY-SA files require the attribution in the credits file |
-| Fonts | System fonts only (`Trebuchet MS`, `Comic Sans MS`, `system-ui`) | Nothing is downloaded |
+| kidlearning code (HTML / CSS / JavaScript ES modules, no build step) | [MIT](LICENSE) | © 2026 Matthieu Saner |
+| Word lists, translations (EN / FR / DE) and the line drawings (`js/data.js`, `js/drawings.js`) | MIT | Written for this project |
+| App icon (`assets/icons/icon.svg`) | MIT | Own artwork; contains a 🐻 emoji character drawn by the viewer's system font |
 
-## 3. Browser platform APIs used
+## 2. Third-party media: animal sounds (`assets/audio/cries/*.mp3`)
 
-These are built into the browser, not dependencies, but the app needs them:
+Twelve recordings from Wikimedia Commons, trimmed and converted for this game. Full details, changes made and checksums: [`assets/audio/cries/CREDITS.md`](assets/audio/cries/CREDITS.md) and [`sources.json`](assets/audio/cries/sources.json). The credits are also shown inside the app (parent settings → Credits).
 
-- Web Speech API (`speechSynthesis`), for spoken words. Voices are supplied by the OS or browser.
-- `localStorage`, to save settings on the device.
-- Service Worker + Web App Manifest, for offline use and "Add to Home Screen".
-- `<dialog>`, CSS Grid and ES modules.
+| Animal | File | Author | License | Original | SHA-256 (start) |
+| --- | --- | --- | --- | --- | --- |
+| dog | `dog.mp3` | Amada44 | [CC BY-SA 3.0](https://creativecommons.org/licenses/by-sa/3.0/) | [Barking of a dog.ogg](https://commons.wikimedia.org/wiki/File:Barking_of_a_dog.ogg) | `7fe904d171d7…` |
+| cat | `cat.mp3` | freemaster2 | [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/) | [Meow of a Siamese cat - freemaster2.wav](https://commons.wikimedia.org/wiki/File:Meow_of_a_Siamese_cat_-_freemaster2.wav) | `69dfdf122bc5…` |
+| cow | `cow.mp3` | Secretlondon | [CC BY-SA 3.0](https://creativecommons.org/licenses/by-sa/3.0/) | [Mudchute cow 1.ogg](https://commons.wikimedia.org/wiki/File:Mudchute_cow_1.ogg) | `09c530052e7d…` |
+| horse | `horse.mp3` | Hü. | Public domain | [Wiehern.ogg](https://commons.wikimedia.org/wiki/File:Wiehern.ogg) | `5a12a84d6155…` |
+| pig | `pig.mp3` | erdie | [CC BY 3.0](https://creativecommons.org/licenses/by/3.0/) | [Pig grunt - Erdie.ogg](https://commons.wikimedia.org/wiki/File:Pig_grunt_-_Erdie.ogg) | `124b836c53dc…` |
+| sheep | `sheep.mp3` | earthcalling | Public domain | [Sheep bleating.ogg](https://commons.wikimedia.org/wiki/File:Sheep_bleating.ogg) | `245e0d432cd5…` |
+| duck | `duck.mp3` | Jonathon Jongsma | [CC BY-SA 3.0](https://creativecommons.org/licenses/by-sa/3.0/) | [Anas platyrhynchos - Mallard - XC62258.ogg](https://commons.wikimedia.org/wiki/File:Anas_platyrhynchos_-_Mallard_-_XC62258.ogg) | `e0215e523346…` |
+| chicken | `chicken.mp3` | alys | Public domain | [Hen announcing shes lain an egg.ogg](https://commons.wikimedia.org/wiki/File:Hen_announcing_shes_lain_an_egg.ogg) | `b413c5f2bddb…` |
+| frog | `frog.mp3` | WrS.tm.pl | Public domain | [Edible frogs, sounds. May. The Village of Krzemienica, Łódź Voivodeship, Poland.ogg](https://commons.wikimedia.org/wiki/File:Edible_frogs,_sounds._May._The_Village_of_Krzemienica,_%C5%81%C3%B3d%C5%BA_Voivodeship,_Poland.ogg) | `7ab083f91261…` |
+| fish | `fish.mp3` | Nevit Dilmen | [CC BY-SA 3.0](https://creativecommons.org/licenses/by-sa/3.0/) | [Bubble 01 nevit.ogg](https://commons.wikimedia.org/wiki/File:Bubble_01_nevit.ogg) | `b4d596e209d4…` |
+| elephant | `elephant.mp3` | தகவலுழவன் (Commons user) | [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/) | [Elephant voice - trumpeting.ogg](https://commons.wikimedia.org/wiki/File:Elephant_voice_-_trumpeting.ogg) | `0369b93ad80c…` |
+| lion | `lion.mp3` | த*உழவன் (Commons user) | Public domain | [Lion raring-sound1TamilNadu178.ogg](https://commons.wikimedia.org/wiki/File:Lion_raring-sound1TamilNadu178.ogg) | `c5f2be58a36e…` |
 
-## 4. Build and deploy tooling (CI only, not shipped)
+### How each license is respected
 
-Used by `.github/workflows/pages.yml` to publish to GitHub Pages:
+| License | Files | Obligations | Done |
+| --- | --- | --- | --- |
+| CC BY-SA 3.0 | dog, cow, duck, fish | Credit the author, link the license, say what changed, keep adaptations under the same license, add no technical restrictions | Credits in-app and in `CREDITS.md`; changes described; adapted files offered under CC BY-SA 3.0; files are served as plain, downloadable MP3s |
+| CC BY 3.0 | pig | Credit the author, link the license, say what changed | Same credits |
+| CC0 1.0 | cat, elephant | None | Credited as a courtesy |
+| Public domain | horse, sheep, chicken, frog, lion | None | Credited as a courtesy |
+
+The MIT license of the code does **not** cover these recordings; they keep the licenses above. The CC BY-SA "share alike" condition applies to the adapted audio files, not to the game's code.
+
+### Legal review (2026-09-20)
+- Every file was re-checked against its Wikimedia Commons page (license template, author, "own work" claim, source). The mallard's license was also confirmed on the original xeno-canto page.
+- **Removed:** a cow recording that was cropped from a commercial "Sound Ideas" library track, and a frog recording labelled both "own work" and "recorded in 1934". Their provenance could not be trusted; they were replaced by self-recorded files with consistent licensing.
+- This is a good-faith review, not legal advice.
+
+## 3. Content rendered by the user's device (not bundled)
+
+| Item | Notes |
+| --- | --- |
+| Emoji pictures (animals, fruit, shapes, category icons) | Emoji characters drawn by the visitor's operating system / browser. No emoji font or image is distributed. |
+| Fonts | System fonts only (`Trebuchet MS`, `Comic Sans MS`, `system-ui`); nothing is downloaded. |
+| Text-to-speech voices | Supplied by the operating system through the Web Speech API. |
+
+## 4. Browser platform APIs used
+
+Web Speech API (`speechSynthesis`), `localStorage` (settings, play time), Service Worker + Web App Manifest (offline, "Add to Home Screen"), Pointer Events, Canvas 2D, `<dialog>`, CSS Grid, ES modules.
+
+## 5. Build and deploy tooling (not shipped)
 
 | Component | Version | License | Purpose |
 | --- | --- | --- | --- |
@@ -45,23 +71,18 @@ Used by `.github/workflows/pages.yml` to publish to GitHub Pages:
 | [actions/configure-pages](https://github.com/actions/configure-pages) | v5 | MIT | Configure Pages |
 | [actions/upload-pages-artifact](https://github.com/actions/upload-pages-artifact) | v3 | MIT | Package the static site |
 | [actions/deploy-pages](https://github.com/actions/deploy-pages) | v4 | MIT | Deploy to GitHub Pages |
-| ubuntu-latest runner | GitHub-hosted | n/a | Runs the workflow |
+| ffmpeg (via imageio-ffmpeg 7.1) | n/a | LGPL/GPL (build dependent) | Used offline, once, to convert the recordings; not shipped |
 
-Actions are pinned to major-version tags. For stricter supply-chain hygiene, pin them to full commit SHAs.
+Actions are pinned to major-version tags; pin to commit SHAs for stricter supply-chain hygiene.
 
-## 5. Development tooling
+## 6. Privacy
 
-None required. To run locally you only need a static file server (for example `python3 -m http.server`) and a modern browser.
+The game collects **no personal data**, has no accounts, no analytics, no ads and makes no network requests to third parties. Settings and play time are stored only in the browser's `localStorage` on the device. Nothing leaves the device.
 
-## 6. Keeping this file current
+## 7. Keeping this file current
 
-Update `SBOM.md` and `sbom.cdx.json` whenever you:
-- add a library, font, image, or audio file from a third party,
-- add or change a GitHub Action in the workflow, or
-- introduce a build step or package manager (then also generate the SBOM from the lockfile, for example with `npx @cyclonedx/cyclonedx-npm`).
+When you add a third-party file (sound, image, font), also: check its license on the source page, add it to `assets/audio/cries/sources.json` (or an equivalent file), and update `CREDITS.md`, this file and `sbom.cdx.json`. Never use files under NonCommercial licenses or whose origin is unclear. If you introduce a build step or package manager, generate the SBOM from the lockfile (for example `npx @cyclonedx/cyclonedx-npm`). GitHub also exports an SBOM under **Insights → Dependency graph**.
 
-GitHub also tracks Actions versions automatically under **Insights → Dependency graph**, where an SBOM can be exported.
+## 8. Vulnerability reporting
 
-## 7. Vulnerability reporting
-
-Open a GitHub issue or contact the maintainer. Because there are no runtime dependencies, the attack surface is limited to this repository's own code.
+Open a GitHub issue or contact the maintainer. With no runtime dependencies, the attack surface is limited to this repository's own code.

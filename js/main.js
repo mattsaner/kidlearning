@@ -85,9 +85,29 @@ function gameScreen(cat, run) {
   show((s) => run(s, cat), { back: () => categoryScreen(cat) });
 }
 
+// Attribution for the third-party sound recordings (CC BY / CC BY-SA require it).
+let soundCredits = null;
+const animalEmoji = Object.fromEntries(CATEGORIES.flatMap((c) => c.items).filter((i) => i.emoji).map((i) => [i.id, i.emoji]));
+
+function creditsView(dlg, back) {
+  const link = (href, text) => el('a', { href, target: '_blank', rel: 'noopener noreferrer' }, text);
+  const list = el('ul', { class: 'credits-list' }, el('li', {}, '…'));
+  const fill = (recordings) => list.replaceChildren(...recordings.map((r) => el('li', {},
+    `${animalEmoji[r.animal] || ''} “`, link(r.original.url, r.original.title), `” — ${r.original.author} · `,
+    r.license.url ? link(r.license.url, r.license.name) : r.license.name, ` · ${r.changes}`)));
+  if (soundCredits) fill(soundCredits);
+  else fetch('assets/audio/cries/sources.json').then((r) => r.json()).then((d) => { soundCredits = d.recordings; fill(soundCredits); })
+    .catch(() => { list.textContent = 'assets/audio/cries/CREDITS.md'; });
+  dlg.replaceChildren(
+    el('h2', {}, t().credits), el('p', { class: 'stats' }, t().creditsIntro), list,
+    el('button', { type: 'button', class: 'chip close', onclick: back }, t().back));
+}
+
 function openSettings() {
   const dlg = el('dialog', { class: 'settings' });
+  let view = 'main';
   const render = () => {
+    if (view === 'credits') return creditsView(dlg, () => { view = 'main'; render(); });
     dlg.replaceChildren(
       el('h2', {}, t().settings),
       el('h3', {}, t().language),
@@ -127,6 +147,7 @@ function openSettings() {
           type: 'button', class: `chip${settings.choices === n ? ' on' : ''}`,
           onclick: () => { settings.choices = n; saveSettings(); render(); },
         }, String(n)))),
+      el('button', { type: 'button', class: 'chip', style: { marginTop: '16px' }, onclick: () => { view = 'credits'; render(); } }, `ℹ️ ${t().credits}`),
       el('button', {
         type: 'button', class: 'chip close',
         onclick: () => { dlg.close(); dlg.remove(); home(); },

@@ -98,6 +98,9 @@ button { font: inherit; color: inherit; cursor: pointer; }
 }
 .timesup .moon { font-size: clamp(96px, 30vmin, 220px); line-height: 1; }
 .timesup .msg { font-size: clamp(28px, 7vmin, 56px); font-weight: 800; max-width: 18em; }
+.credits-list { list-style: none; padding: 0; margin: 8px 0; max-height: 48vh; overflow: auto; font-size: 14px; line-height: 1.35; -webkit-user-select: text; user-select: text; }
+.credits-list li { margin-bottom: 10px; }
+.credits-list a { color: #0b5cad; }
 .settings .stats { margin: 10px 2px 8px; font-variant-numeric: tabular-nums; opacity: 0.8; }
 
 /* Cards */

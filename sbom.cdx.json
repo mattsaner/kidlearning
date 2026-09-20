@@ -1,15 +1,15 @@
 {
   "bomFormat": "CycloneDX",
   "specVersion": "1.5",
-  "version": 1,
+  "version": 2,
   "metadata": {
     "timestamp": "2026-09-20T00:00:00Z",
     "component": {
       "type": "application",
       "bom-ref": "kidlearning",
       "name": "kidlearning",
-      "version": "1.2.1",
-      "description": "Toddler-friendly browser game to learn colors, animals, fruits and numbers in English, French and German.",
+      "version": "1.2.2",
+      "description": "Toddler-friendly browser game to learn colors, animals, fruits, numbers and to colour drawings in English, French and German.",
       "licenses": [
         {
           "license": {
@@ -17,6 +17,7 @@
           }
         }
       ],
+      "copyright": "Copyright (c) 2026 Matthieu Saner",
       "externalReferences": [
         {
           "type": "vcs",
@@ -32,33 +33,40 @@
   "components": [
     {
       "type": "data",
-      "bom-ref": "audio-fish",
-      "name": "assets/audio/cries/fish.mp3",
-      "description": "Fish \"blub\" derived from Wikimedia Commons file \"Bubble 01 nevit.ogg\" by Nevit Dilmen",
+      "bom-ref": "audio-dog",
+      "name": "assets/audio/cries/dog.mp3",
+      "author": "Amada44",
+      "description": "Animal sound derived from Wikimedia Commons file \"Barking of a dog.ogg\"",
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "7fe904d171d76c7b07525127a0261c9258e9f918dc3b78fcb018ecde33c44267"
+        }
+      ],
       "licenses": [
         {
           "license": {
-            "id": "CC-BY-SA-3.0"
+            "id": "CC-BY-SA-3.0",
+            "url": "https://creativecommons.org/licenses/by-sa/3.0/"
           }
         }
       ],
-      "externalReferences": [
+      "properties": [
         {
-          "type": "distribution",
-          "url": "https://commons.wikimedia.org/wiki/File:Bubble_01_nevit.ogg"
-        }
-      ]
-    },
-    {
-      "type": "data",
-      "bom-ref": "audio-dog",
-      "name": "assets/audio/cries/dog.mp3",
-      "description": "Animal cry derived from Wikimedia Commons file \"Barking of a dog.ogg\" by Amada44",
-      "licenses": [
+          "name": "original-title",
+          "value": "Barking of a dog.ogg"
+        },
         {
-          "license": {
-            "id": "CC-BY-SA-3.0"
-          }
+          "name": "original-source",
+          "value": "Own work"
+        },
+        {
+          "name": "changes",
+          "value": "Trimmed to about 3 seconds, converted to mono MP3, loudness-normalised, faded out."
+        },
+        {
+          "name": "license-verified",
+          "value": "2026-09-20"
         }
       ],
       "externalReferences": [
@@ -66,56 +74,140 @@
           "type": "distribution",
           "url": "https://commons.wikimedia.org/wiki/File:Barking_of_a_dog.ogg"
         }
-      ]
+      ],
+      "copyright": "Copyright Amada44"
     },
     {
       "type": "data",
       "bom-ref": "audio-cat",
       "name": "assets/audio/cries/cat.mp3",
-      "description": "Animal cry derived from Wikimedia Commons file \"Meow of a Siamese cat - freemaster2.wav\" by freemaster2",
+      "author": "freemaster2",
+      "description": "Animal sound derived from Wikimedia Commons file \"Meow of a Siamese cat - freemaster2.wav\"",
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "69dfdf122bc5f8c4bc4e968ca4484202971659a167abcbe031e4bc5c7e889f5b"
+        }
+      ],
       "licenses": [
         {
           "license": {
-            "id": "CC0-1.0"
+            "id": "CC0-1.0",
+            "url": "https://creativecommons.org/publicdomain/zero/1.0/"
           }
+        }
+      ],
+      "properties": [
+        {
+          "name": "original-title",
+          "value": "Meow of a Siamese cat - freemaster2.wav"
+        },
+        {
+          "name": "original-source",
+          "value": "Freesound #66518"
+        },
+        {
+          "name": "changes",
+          "value": "Trimmed to about 3 seconds, converted to mono MP3, loudness-normalised, faded out."
+        },
+        {
+          "name": "license-verified",
+          "value": "2026-09-20"
         }
       ],
       "externalReferences": [
         {
           "type": "distribution",
           "url": "https://commons.wikimedia.org/wiki/File:Meow_of_a_Siamese_cat_-_freemaster2.wav"
+        },
+        {
+          "type": "website",
+          "url": "https://freesound.org/people/freemaster2/sounds/66518/"
         }
-      ]
+      ],
+      "copyright": "Copyright freemaster2"
     },
     {
       "type": "data",
       "bom-ref": "audio-cow",
       "name": "assets/audio/cries/cow.mp3",
-      "description": "Animal cry derived from Wikimedia Commons file \"Single Cow Moo.ogg\" by MichaeltheFox8621",
+      "author": "Secretlondon",
+      "description": "Animal sound derived from Wikimedia Commons file \"Mudchute cow 1.ogg\"",
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "09c530052e7d4a353271dc3e192700d13230438c3942479a8c23dc9f52a5dd49"
+        }
+      ],
       "licenses": [
         {
           "license": {
-            "id": "CC-BY-SA-4.0"
+            "id": "CC-BY-SA-3.0",
+            "url": "https://creativecommons.org/licenses/by-sa/3.0/"
           }
+        }
+      ],
+      "properties": [
+        {
+          "name": "original-title",
+          "value": "Mudchute cow 1.ogg"
+        },
+        {
+          "name": "original-source",
+          "value": "Own work, recorded at Mudchute City Farm, London (also offered under GFDL)"
+        },
+        {
+          "name": "changes",
+          "value": "Trimmed to about 3 seconds, converted to mono MP3, loudness-normalised, faded out."
+        },
+        {
+          "name": "license-verified",
+          "value": "2026-09-20"
         }
       ],
       "externalReferences": [
         {
           "type": "distribution",
-          "url": "https://commons.wikimedia.org/wiki/File:Single_Cow_Moo.ogg"
+          "url": "https://commons.wikimedia.org/wiki/File:Mudchute_cow_1.ogg"
         }
-      ]
+      ],
+      "copyright": "Copyright Secretlondon"
     },
     {
       "type": "data",
       "bom-ref": "audio-horse",
       "name": "assets/audio/cries/horse.mp3",
-      "description": "Animal cry derived from Wikimedia Commons file \"Wiehern.ogg\" by Hü.",
+      "author": "Hü.",
+      "description": "Animal sound derived from Wikimedia Commons file \"Wiehern.ogg\"",
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "5a12a84d6155413145777b6edaa57161422ead3e092c1019c84643fb677eae88"
+        }
+      ],
       "licenses": [
         {
           "license": {
             "name": "Public domain"
           }
+        }
+      ],
+      "properties": [
+        {
+          "name": "original-title",
+          "value": "Wiehern.ogg"
+        },
+        {
+          "name": "original-source",
+          "value": "Own work"
+        },
+        {
+          "name": "changes",
+          "value": "Trimmed to about 3 seconds, converted to mono MP3, loudness-normalised, faded out."
+        },
+        {
+          "name": "license-verified",
+          "value": "2026-09-20"
         }
       ],
       "externalReferences": [
@@ -129,26 +221,64 @@
       "type": "data",
       "bom-ref": "audio-pig",
       "name": "assets/audio/cries/pig.mp3",
-      "description": "Animal cry derived from Wikimedia Commons file \"Pig grunt - Erdie.ogg\" by erdie",
+      "author": "erdie",
+      "description": "Animal sound derived from Wikimedia Commons file \"Pig grunt - Erdie.ogg\"",
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "124b836c53dc342b3251befe6bd611bd34fd794e8225464f2f49b2474a9c2067"
+        }
+      ],
       "licenses": [
         {
           "license": {
-            "id": "CC-BY-3.0"
+            "id": "CC-BY-3.0",
+            "url": "https://creativecommons.org/licenses/by/3.0/"
           }
+        }
+      ],
+      "properties": [
+        {
+          "name": "original-title",
+          "value": "Pig grunt - Erdie.ogg"
+        },
+        {
+          "name": "original-source",
+          "value": "Freesound #44274"
+        },
+        {
+          "name": "changes",
+          "value": "Trimmed, the grunt is played twice, converted to mono MP3, loudness-normalised, faded out."
+        },
+        {
+          "name": "license-verified",
+          "value": "2026-09-20"
         }
       ],
       "externalReferences": [
         {
           "type": "distribution",
           "url": "https://commons.wikimedia.org/wiki/File:Pig_grunt_-_Erdie.ogg"
+        },
+        {
+          "type": "website",
+          "url": "https://freesound.org/people/Erdie/sounds/44274/"
         }
-      ]
+      ],
+      "copyright": "Copyright erdie"
     },
     {
       "type": "data",
       "bom-ref": "audio-sheep",
       "name": "assets/audio/cries/sheep.mp3",
-      "description": "Animal cry derived from Wikimedia Commons file \"Sheep bleating.ogg\" by earthcalling (clipped from a PDSounds recording)",
+      "author": "earthcalling",
+      "description": "Animal sound derived from Wikimedia Commons file \"Sheep bleating.ogg\"",
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "245e0d432cd5117fbb0eea5b7cab9b6b1822343c1ffbfbbf7484dc8103c6e001"
+        }
+      ],
       "licenses": [
         {
           "license": {
@@ -156,10 +286,32 @@
           }
         }
       ],
+      "properties": [
+        {
+          "name": "original-title",
+          "value": "Sheep bleating.ogg"
+        },
+        {
+          "name": "original-source",
+          "value": "Clipped from a PDSounds recording (\"Corner of a sheep field in summer\")"
+        },
+        {
+          "name": "changes",
+          "value": "Trimmed to about 3 seconds, converted to mono MP3, loudness-normalised, faded out."
+        },
+        {
+          "name": "license-verified",
+          "value": "2026-09-20"
+        }
+      ],
       "externalReferences": [
         {
           "type": "distribution",
           "url": "https://commons.wikimedia.org/wiki/File:Sheep_bleating.ogg"
+        },
+        {
+          "type": "website",
+          "url": "http://www.pdsounds.org/"
         }
       ]
     },
@@ -167,26 +319,64 @@
       "type": "data",
       "bom-ref": "audio-duck",
       "name": "assets/audio/cries/duck.mp3",
-      "description": "Animal cry derived from Wikimedia Commons file \"Anas platyrhynchos - Mallard - XC62258.ogg\" by Jonathon Jongsma",
+      "author": "Jonathon Jongsma",
+      "description": "Animal sound derived from Wikimedia Commons file \"Anas platyrhynchos - Mallard - XC62258.ogg\"",
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "e0215e523346ceac877886e08efdffca9c5b0234825c19eaa1eb624cd9a89634"
+        }
+      ],
       "licenses": [
         {
           "license": {
-            "id": "CC-BY-SA-3.0"
+            "id": "CC-BY-SA-3.0",
+            "url": "https://creativecommons.org/licenses/by-sa/3.0/"
           }
+        }
+      ],
+      "properties": [
+        {
+          "name": "original-title",
+          "value": "Anas platyrhynchos - Mallard - XC62258.ogg"
+        },
+        {
+          "name": "original-source",
+          "value": "xeno-canto XC62258 (license CC BY-SA 3.0 confirmed on xeno-canto.org)"
+        },
+        {
+          "name": "changes",
+          "value": "Trimmed to about 3 seconds, converted to mono MP3, loudness-normalised, faded out."
+        },
+        {
+          "name": "license-verified",
+          "value": "2026-09-20"
         }
       ],
       "externalReferences": [
         {
           "type": "distribution",
           "url": "https://commons.wikimedia.org/wiki/File:Anas_platyrhynchos_-_Mallard_-_XC62258.ogg"
+        },
+        {
+          "type": "website",
+          "url": "https://xeno-canto.org/62258"
         }
-      ]
+      ],
+      "copyright": "Copyright Jonathon Jongsma"
     },
     {
       "type": "data",
       "bom-ref": "audio-chicken",
       "name": "assets/audio/cries/chicken.mp3",
-      "description": "Animal cry derived from Wikimedia Commons file \"Hen announcing shes lain an egg.ogg\" by alys",
+      "author": "alys",
+      "description": "Animal sound derived from Wikimedia Commons file \"Hen announcing shes lain an egg.ogg\"",
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "b413c5f2bddb902ecff00e1a450222bf32e84b3175e0c3248596fdc9258f37d1"
+        }
+      ],
       "licenses": [
         {
           "license": {
@@ -194,10 +384,32 @@
           }
         }
       ],
+      "properties": [
+        {
+          "name": "original-title",
+          "value": "Hen announcing shes lain an egg.ogg"
+        },
+        {
+          "name": "original-source",
+          "value": "PDSounds #542"
+        },
+        {
+          "name": "changes",
+          "value": "Trimmed to about 3 seconds, converted to mono MP3, loudness-normalised, faded out."
+        },
+        {
+          "name": "license-verified",
+          "value": "2026-09-20"
+        }
+      ],
       "externalReferences": [
         {
           "type": "distribution",
           "url": "https://commons.wikimedia.org/wiki/File:Hen_announcing_shes_lain_an_egg.ogg"
+        },
+        {
+          "type": "website",
+          "url": "http://www.pdsounds.org/"
         }
       ]
     },
@@ -205,45 +417,14 @@
       "type": "data",
       "bom-ref": "audio-frog",
       "name": "assets/audio/cries/frog.mp3",
-      "description": "Animal cry derived from Wikimedia Commons file \"Single Frog Croak.oga\" by MichaeltheFox8621",
-      "licenses": [
+      "author": "WrS.tm.pl",
+      "description": "Animal sound derived from Wikimedia Commons file \"Edible frogs, sounds. May. The Village of Krzemienica, Łódź Voivodeship, Poland.ogg\"",
+      "hashes": [
         {
-          "license": {
-            "id": "CC-BY-SA-4.0"
-          }
+          "alg": "SHA-256",
+          "content": "7ab083f9126112a74193d8553519d8aba40fc48486c2836adf536d6afb2a2234"
         }
       ],
-      "externalReferences": [
-        {
-          "type": "distribution",
-          "url": "https://commons.wikimedia.org/wiki/File:Single_Frog_Croak.oga"
-        }
-      ]
-    },
-    {
-      "type": "data",
-      "bom-ref": "audio-elephant",
-      "name": "assets/audio/cries/elephant.mp3",
-      "description": "Animal cry derived from Wikimedia Commons file \"Elephant voice - trumpeting.ogg\" by தகவலுழவன்",
-      "licenses": [
-        {
-          "license": {
-            "id": "CC0-1.0"
-          }
-        }
-      ],
-      "externalReferences": [
-        {
-          "type": "distribution",
-          "url": "https://commons.wikimedia.org/wiki/File:Elephant_voice_-_trumpeting.ogg"
-        }
-      ]
-    },
-    {
-      "type": "data",
-      "bom-ref": "audio-lion",
-      "name": "assets/audio/cries/lion.mp3",
-      "description": "Animal cry derived from Wikimedia Commons file \"Lion raring-sound1TamilNadu178.ogg\" by த*உழவன்",
       "licenses": [
         {
           "license": {
@@ -251,10 +432,206 @@
           }
         }
       ],
+      "properties": [
+        {
+          "name": "original-title",
+          "value": "Edible frogs, sounds. May. The Village of Krzemienica, Łódź Voivodeship, Poland.ogg"
+        },
+        {
+          "name": "original-source",
+          "value": "Own work"
+        },
+        {
+          "name": "changes",
+          "value": "Trimmed to about 3 seconds, converted to mono MP3, loudness-normalised, faded out."
+        },
+        {
+          "name": "license-verified",
+          "value": "2026-09-20"
+        }
+      ],
+      "externalReferences": [
+        {
+          "type": "distribution",
+          "url": "https://commons.wikimedia.org/wiki/File:Edible_frogs,_sounds._May._The_Village_of_Krzemienica,_%C5%81%C3%B3d%C5%BA_Voivodeship,_Poland.ogg"
+        }
+      ]
+    },
+    {
+      "type": "data",
+      "bom-ref": "audio-fish",
+      "name": "assets/audio/cries/fish.mp3",
+      "author": "Nevit Dilmen",
+      "description": "Animal sound derived from Wikimedia Commons file \"Bubble 01 nevit.ogg\"",
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "b4d596e209d4f8ef54b0d17696978a3f9fea047cd0cbfa51de4ccbd8dc08e639"
+        }
+      ],
+      "licenses": [
+        {
+          "license": {
+            "id": "CC-BY-SA-3.0",
+            "url": "https://creativecommons.org/licenses/by-sa/3.0/"
+          }
+        }
+      ],
+      "properties": [
+        {
+          "name": "original-title",
+          "value": "Bubble 01 nevit.ogg"
+        },
+        {
+          "name": "original-source",
+          "value": "Own work (also offered under GFDL); fish are silent, so a bubble sound stands in for a fish \"speaking\""
+        },
+        {
+          "name": "changes",
+          "value": "Trimmed to 0.8 second, played three times at different pitches (x1.0, x1.3, x0.9), converted to mono MP3, loudness-normalised."
+        },
+        {
+          "name": "license-verified",
+          "value": "2026-09-20"
+        }
+      ],
+      "externalReferences": [
+        {
+          "type": "distribution",
+          "url": "https://commons.wikimedia.org/wiki/File:Bubble_01_nevit.ogg"
+        }
+      ],
+      "copyright": "Copyright Nevit Dilmen"
+    },
+    {
+      "type": "data",
+      "bom-ref": "audio-elephant",
+      "name": "assets/audio/cries/elephant.mp3",
+      "author": "தகவலுழவன் (Commons user)",
+      "description": "Animal sound derived from Wikimedia Commons file \"Elephant voice - trumpeting.ogg\"",
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "0369b93ad80cd7184c06d32f3bee82b0f41650c4c0ed13b0431fc9118fc9e461"
+        }
+      ],
+      "licenses": [
+        {
+          "license": {
+            "id": "CC0-1.0",
+            "url": "https://creativecommons.org/publicdomain/zero/1.0/"
+          }
+        }
+      ],
+      "properties": [
+        {
+          "name": "original-title",
+          "value": "Elephant voice - trumpeting.ogg"
+        },
+        {
+          "name": "original-source",
+          "value": "Own work"
+        },
+        {
+          "name": "changes",
+          "value": "Trimmed to about 3 seconds, converted to mono MP3, loudness-normalised, faded out."
+        },
+        {
+          "name": "license-verified",
+          "value": "2026-09-20"
+        }
+      ],
+      "externalReferences": [
+        {
+          "type": "distribution",
+          "url": "https://commons.wikimedia.org/wiki/File:Elephant_voice_-_trumpeting.ogg"
+        }
+      ],
+      "copyright": "Copyright தகவலுழவன் (Commons user)"
+    },
+    {
+      "type": "data",
+      "bom-ref": "audio-lion",
+      "name": "assets/audio/cries/lion.mp3",
+      "author": "த*உழவன் (Commons user)",
+      "description": "Animal sound derived from Wikimedia Commons file \"Lion raring-sound1TamilNadu178.ogg\"",
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "c5f2be58a36e2288317513bf376072087fd8fced10dab2a762a85e170f7c6ffd"
+        }
+      ],
+      "licenses": [
+        {
+          "license": {
+            "name": "Public domain"
+          }
+        }
+      ],
+      "properties": [
+        {
+          "name": "original-title",
+          "value": "Lion raring-sound1TamilNadu178.ogg"
+        },
+        {
+          "name": "original-source",
+          "value": "Own work, lion in captivity"
+        },
+        {
+          "name": "changes",
+          "value": "Trimmed to about 3 seconds, converted to mono MP3, loudness-normalised, faded out."
+        },
+        {
+          "name": "license-verified",
+          "value": "2026-09-20"
+        }
+      ],
       "externalReferences": [
         {
           "type": "distribution",
           "url": "https://commons.wikimedia.org/wiki/File:Lion_raring-sound1TamilNadu178.ogg"
+        }
+      ]
+    },
+    {
+      "type": "data",
+      "bom-ref": "system-emoji",
+      "name": "Emoji glyphs (system emoji font)",
+      "scope": "excluded",
+      "description": "Pictures of animals, fruit and shapes are emoji characters drawn by the visitor's own operating system or browser. No emoji font or image is bundled or redistributed.",
+      "licenses": [
+        {
+          "license": {
+            "name": "Provided by the visitor's operating system"
+          }
+        }
+      ]
+    },
+    {
+      "type": "data",
+      "bom-ref": "system-fonts",
+      "name": "System fonts (Trebuchet MS, Comic Sans MS, system-ui)",
+      "scope": "excluded",
+      "description": "Named in the CSS font stack only. Nothing is downloaded or bundled.",
+      "licenses": [
+        {
+          "license": {
+            "name": "Provided by the visitor's operating system"
+          }
+        }
+      ]
+    },
+    {
+      "type": "application",
+      "bom-ref": "tool-ffmpeg",
+      "name": "ffmpeg (via imageio-ffmpeg 7.1)",
+      "scope": "excluded",
+      "description": "Used offline, once, to trim and convert the recordings to MP3. Not shipped; the output files are not encumbered by its license.",
+      "licenses": [
+        {
+          "license": {
+            "name": "LGPL-2.1-or-later / GPL-2.0-or-later (depends on the build)"
+          }
         }
       ]
     },
@@ -327,7 +704,6 @@
     {
       "ref": "kidlearning",
       "dependsOn": [
-        "audio-fish",
         "audio-dog",
         "audio-cat",
         "audio-cow",
@@ -337,6 +713,7 @@
         "audio-duck",
         "audio-chicken",
         "audio-frog",
+        "audio-fish",
         "audio-elephant",
         "audio-lion"
       ]

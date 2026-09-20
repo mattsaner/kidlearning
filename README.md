@@ -106,4 +106,10 @@ The project has no runtime dependencies. See [SBOM.md](SBOM.md) (human-readable)
 
 ## License
 
-[MIT](LICENSE) © 2026 Matthieu Saner
+The **code and original content** are under the [MIT license](LICENSE) © 2026 Matthieu Saner.
+
+The **animal sound recordings** (`assets/audio/cries/`) are third-party works from Wikimedia Commons under their own licenses (CC BY-SA 3.0, CC BY 3.0, CC0, public domain). Author, license and changes for each are in [assets/audio/cries/CREDITS.md](assets/audio/cries/CREDITS.md) and in the app (parent settings → Credits).
+
+## Privacy
+
+The game collects **no personal data**: no accounts, analytics, ads or third-party requests. Settings and play time stay in the browser's local storage on the device.

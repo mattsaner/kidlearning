@@ -2,6 +2,7 @@ import { LANGUAGES } from './data.js';
 
 const STRINGS = {
   en: {
+    credits: 'Credits', creditsIntro: 'Animal sounds from Wikimedia Commons, adapted (trimmed and converted). Each keeps its own license. Game code: MIT license, © 2026 Matthieu Saner.',
     playTime: 'Play time', off: 'Off', minutes: 'min', today: 'Today', session: 'Session', resetToday: 'Reset today', showTimer: 'Show timer',
     timesUp: 'All done for today! See you tomorrow.', unlockHint: 'Hold to add 5 minutes (parents)',
     explore: 'Explore', findit: 'Find it!', sounds: 'Sounds', draw: 'Drawing', settings: 'Settings', language: 'Language',
@@ -10,6 +11,7 @@ const STRINGS = {
     close: 'Close', mode: 'Game', choices: 'Choices per round',
   },
   fr: {
+    credits: 'Crédits', creditsIntro: "Sons d'animaux issus de Wikimedia Commons, adaptés (découpés et convertis). Chacun garde sa licence. Code du jeu : licence MIT, © 2026 Matthieu Saner.",
     playTime: 'Temps de jeu', off: 'Désactivé', minutes: 'min', today: "Aujourd'hui", session: 'Session', resetToday: 'Remettre à zéro', showTimer: 'Afficher le minuteur',
     timesUp: "C'est fini pour aujourd'hui ! À demain.", unlockHint: 'Maintenir pour ajouter 5 minutes (parents)',
     explore: 'Explorer', findit: 'Trouve !', sounds: 'Sons', draw: 'Dessin', settings: 'Réglages', language: 'Langue',
@@ -18,6 +20,7 @@ const STRINGS = {
     close: 'Fermer', mode: 'Jeu', choices: 'Choix par tour',
   },
   de: {
+    credits: 'Danksagung', creditsIntro: 'Tiergeräusche von Wikimedia Commons, bearbeitet (gekürzt und konvertiert). Jedes behält seine eigene Lizenz. Spielcode: MIT-Lizenz, © 2026 Matthieu Saner.',
     playTime: 'Spielzeit', off: 'Aus', minutes: 'Min.', today: 'Heute', session: 'Sitzung', resetToday: 'Zurücksetzen', showTimer: 'Timer anzeigen',
     timesUp: 'Für heute ist Schluss! Bis morgen.', unlockHint: 'Gedrückt halten, um 5 Minuten zu geben (Eltern)',
     explore: 'Entdecken', findit: 'Finde es!', sounds: 'Geräusche', draw: 'Malen', settings: 'Einstellungen', language: 'Sprache',
