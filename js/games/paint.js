@@ -65,18 +65,22 @@ export function startPaint(root, drawing) {
   const regions = prepare(drawing);
 
   // --- hidden map: which region is at a point (region index + 1, 0 = none)
+  // Ids are spread over the 0-255 range (not 1, 2, 3...) so that any rounding or
+  // colour-management difference between browsers cannot turn one region into another.
+  const idStep = Math.max(1, Math.floor(250 / regions.length));
   const idMap = (() => {
     const c = document.createElement('canvas');
     c.width = c.height = ID_RES;
     const ctx = c.getContext('2d', { willReadFrequently: true });
     ctx.scale(ID_RES / 100, ID_RES / 100);
-    regions.forEach((r, i) => { ctx.fillStyle = `rgb(${i + 1},0,0)`; ctx.fill(r.path); });
+    regions.forEach((r, i) => { ctx.fillStyle = `rgb(${(i + 1) * idStep},0,0)`; ctx.fill(r.path); });
     return ctx.getImageData(0, 0, ID_RES, ID_RES).data;
   })();
   const idAt = (x, y) => {
     if (x < 0 || y < 0 || x >= 100 || y >= 100) return 0;
     const i = (Math.floor((y * ID_RES) / 100) * ID_RES + Math.floor((x * ID_RES) / 100)) * 4;
-    const id = idMap[i + 3] >= 128 ? Math.round(idMap[i]) : 0;
+    if (idMap[i + 3] < 128) return 0;
+    const id = Math.round(idMap[i] / idStep);
     return id <= regions.length ? id : 0;
   };
 
@@ -135,6 +139,11 @@ export function startPaint(root, drawing) {
       pctx.strokeStyle = pctx.fillStyle = region.color.color;
       if (op.fill) {
         pctx.fillRect(-10, -10, 120, 120);
+      } else if (op.ax === op.bx && op.ay === op.by) {
+        // a tap without movement: a zero-length line is not drawn reliably, so draw a dot
+        pctx.beginPath();
+        pctx.arc(op.ax, op.ay, BRUSH / 2, 0, Math.PI * 2);
+        pctx.fill();
       } else {
         pctx.lineWidth = BRUSH;
         pctx.lineCap = 'round';
