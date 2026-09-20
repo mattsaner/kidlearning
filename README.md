@@ -15,8 +15,25 @@ Built for a 20‑month‑old: giant tap targets, spoken words, cheerful animatio
 
 Categories: 🎨 Colors · 🐶 Animals · 🍎 Fruits & veggies · 🔢 Numbers & shapes
 
-### For parents
-Press and hold the ⚙️ button (bottom right of the home screen) for 1.5 s to open settings: language (🇬🇧 🇫🇷 🇩🇪), sound on/off, and how many pictures appear in *Find it!*. Settings are saved in the browser.
+### For parents: the settings page
+
+The settings are hidden behind a **press-and-hold** button so a toddler can't open them by accident.
+
+**How to open them**
+1. Go to the **home screen** (the one with the four big category tiles). Tap the ⬅️ button to get back there from a game.
+2. Find the small, semi-transparent ⚙️ button in the **bottom-right corner**.
+3. **Press and hold** it for about **1.5 seconds** (a quick tap does nothing). It grows and turns yellow while you hold; release early and nothing happens.
+4. The settings window opens. On a keyboard, focus the button and press <kbd>Enter</kbd>.
+
+**What you can change**
+
+| Setting | Options |
+| --- | --- |
+| Language | 🇬🇧 English · 🇫🇷 Français · 🇩🇪 Deutsch (changes the spoken words and the on-screen text; default: Français) |
+| Sound | 🔊 on / 🔇 off |
+| Choices per round | 2, 3 or 4 pictures in *Find it!* (start with 2 for young toddlers) |
+
+Press **Close** (or <kbd>Esc</kbd>) to go back to the home screen. Settings are saved in the browser on that device, so they need to be set once per device. The default language is **French**.
 
 The game can be added to a phone/tablet home screen (it's a PWA and works offline once loaded).
 
@@ -63,6 +80,10 @@ js/ui.js            DOM helpers, confetti, hold-to-open button
 js/games/           Explore and Find-it modes
 sw.js, manifest…    offline / installable app
 ```
+
+## Software Bill of Materials
+
+The project has no runtime dependencies. See [SBOM.md](SBOM.md) (human-readable) and [sbom.cdx.json](sbom.cdx.json) (CycloneDX).
 
 ## License
 

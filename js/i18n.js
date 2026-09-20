@@ -22,12 +22,8 @@ const STRINGS = {
 };
 
 const KEY = 'kidlearning.settings';
-const defaults = { lang: null, sound: true, choices: 2 };
-
-function detectLang() {
-  const nav = (navigator.language || 'en').slice(0, 2);
-  return LANGUAGES.some((l) => l.id === nav) ? nav : 'en';
-}
+const DEFAULT_LANG = 'fr';
+const defaults = { lang: DEFAULT_LANG, sound: true, choices: 2 };
 
 export const settings = { ...defaults };
 
@@ -35,7 +31,7 @@ export function loadSettings() {
   try {
     Object.assign(settings, JSON.parse(localStorage.getItem(KEY)) || {});
   } catch { /* storage unavailable */ }
-  if (!settings.lang) settings.lang = detectLang();
+  if (!LANGUAGES.some((l) => l.id === settings.lang)) settings.lang = DEFAULT_LANG;
 }
 
 export function saveSettings() {

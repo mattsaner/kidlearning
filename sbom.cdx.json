@@ -1,0 +1,68 @@
+{
+  "bomFormat": "CycloneDX",
+  "specVersion": "1.5",
+  "version": 1,
+  "metadata": {
+    "timestamp": "2026-09-20T00:00:00Z",
+    "component": {
+      "type": "application",
+      "bom-ref": "kidlearning",
+      "name": "kidlearning",
+      "version": "1.0.0",
+      "description": "Toddler-friendly browser game to learn colors, animals, fruits and numbers in English, French and German.",
+      "licenses": [{ "license": { "id": "MIT" } }],
+      "externalReferences": [
+        { "type": "vcs", "url": "https://github.com/mattsaner/kidlearning" },
+        { "type": "website", "url": "https://mattsaner.github.io/kidlearning/" }
+      ]
+    }
+  },
+  "components": [
+    {
+      "type": "application",
+      "bom-ref": "gha-checkout",
+      "name": "actions/checkout",
+      "version": "v4",
+      "scope": "excluded",
+      "description": "CI only, not shipped",
+      "purl": "pkg:githubactions/actions/checkout@v4",
+      "licenses": [{ "license": { "id": "MIT" } }]
+    },
+    {
+      "type": "application",
+      "bom-ref": "gha-configure-pages",
+      "name": "actions/configure-pages",
+      "version": "v5",
+      "scope": "excluded",
+      "description": "CI only, not shipped",
+      "purl": "pkg:githubactions/actions/configure-pages@v5",
+      "licenses": [{ "license": { "id": "MIT" } }]
+    },
+    {
+      "type": "application",
+      "bom-ref": "gha-upload-pages-artifact",
+      "name": "actions/upload-pages-artifact",
+      "version": "v3",
+      "scope": "excluded",
+      "description": "CI only, not shipped",
+      "purl": "pkg:githubactions/actions/upload-pages-artifact@v3",
+      "licenses": [{ "license": { "id": "MIT" } }]
+    },
+    {
+      "type": "application",
+      "bom-ref": "gha-deploy-pages",
+      "name": "actions/deploy-pages",
+      "version": "v4",
+      "scope": "excluded",
+      "description": "CI only, not shipped",
+      "purl": "pkg:githubactions/actions/deploy-pages@v4",
+      "licenses": [{ "license": { "id": "MIT" } }]
+    }
+  ],
+  "dependencies": [
+    {
+      "ref": "kidlearning",
+      "dependsOn": []
+    }
+  ]
+}
