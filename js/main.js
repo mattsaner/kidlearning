@@ -16,7 +16,7 @@ function show(build, { back } = {}) {
   window.speechSynthesis?.cancel();
   const screen = el('main', { class: 'screen' });
   if (back) {
-    screen.append(el('button', { class: 'back', type: 'button', 'aria-label': t().back, onclick: back }, '⬅️'));
+    screen.append(el('button', { class: 'back', type: 'button', 'aria-label': t().back, onpress: back }, '⬅️'));
   }
   app.replaceChildren(screen);
   cleanup = build(screen) || null;
@@ -29,7 +29,7 @@ function home() {
       grid.append(
         el('button', {
           class: 'tile', type: 'button',
-          onclick: () => { speak(cat.names[settings.lang]); categoryScreen(cat); },
+          onpress: () => { speak(cat.names[settings.lang]); categoryScreen(cat); },
         }, el('span', { class: 'tile-icon' }, cat.icon), el('span', { class: 'tile-label' }, cat.names[settings.lang]))
       );
     }
@@ -49,7 +49,7 @@ function categoryScreen(cat) {
     const grid = el('div', { class: 'menu' });
     for (const m of modes) {
       grid.append(
-        el('button', { class: 'tile', type: 'button', onclick: () => gameScreen(cat, m.run) },
+        el('button', { class: 'tile', type: 'button', onpress: () => gameScreen(cat, m.run) },
           el('span', { class: 'tile-icon' }, m.icon), el('span', { class: 'tile-label' }, m.label))
       );
     }
@@ -95,6 +95,13 @@ function openSettings() {
   document.body.append(dlg);
   dlg.showModal();
 }
+
+// A toddler pressing hard or with a whole hand must not zoom, select or open menus.
+// (iOS Safari ignores user-scalable=no, so block its gesture events explicitly.)
+for (const ev of ['gesturestart', 'gesturechange', 'gestureend', 'dblclick', 'contextmenu']) {
+  document.addEventListener(ev, (e) => e.preventDefault());
+}
+document.addEventListener('touchmove', (e) => { if (e.touches.length > 1) e.preventDefault(); }, { passive: false });
 
 loadSettings();
 home();

@@ -1,4 +1,4 @@
-import { el, card, replayAnimation, confetti } from '../ui.js';
+import { el, card, replayAnimation, confetti, onPress } from '../ui.js';
 import { speak } from '../speech.js';
 import { settings, t, pick } from '../i18n.js';
 
@@ -7,8 +7,10 @@ const shuffle = (a) => a.map((v) => [Math.random(), v]).sort((x, y) => x[0] - y[
 export function startFindIt(root, category) {
   let last = null;
   let timer;
+  let currentPrompt = () => {};
   const board = el('div', { class: 'board' });
   const replay = el('button', { class: 'replay', type: 'button', 'aria-label': 'Replay' }, '🔊');
+  onPress(replay, () => currentPrompt());
   root.append(replay, board);
 
   function round() {
@@ -18,7 +20,7 @@ export function startFindIt(root, category) {
     const n = Math.min(settings.choices, category.items.length);
     const others = shuffle(category.items.filter((i) => i.id !== target.id)).slice(0, n - 1);
     const prompt = () => speak(t().find(target.names[settings.lang]));
-    replay.onclick = prompt;
+    currentPrompt = prompt;
 
     let locked = false;
     board.replaceChildren(

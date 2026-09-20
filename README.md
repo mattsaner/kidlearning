@@ -16,6 +16,9 @@ Built for a 20‑month‑old: giant tap targets, spoken words, cheerful animatio
 
 Categories: 🎨 Colors · 🐶 Animals · 🍎 Fruits & veggies · 🔢 Numbers & shapes
 
+### Toddler-proof touch handling
+Little hands press hard, hold, slide and rest a palm on the screen, so the game reacts the moment a finger **touches** a picture (no clean "tap" needed) and blocks pinch-zoom, double-tap zoom, text selection and long-press menus (also on iPad, where Safari ignores \`user-scalable=no\`). Scrolling with one finger still works.
+
 ### For parents: the settings page
 
 The settings are hidden behind a **press-and-hold** button so a toddler can't open them by accident.

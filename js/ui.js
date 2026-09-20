@@ -1,10 +1,28 @@
 // Small DOM helpers shared by screens.
 
+/**
+ * Fire on first touch instead of waiting for a completed "click". A toddler who
+ * presses hard, holds or slides a little never produces a click on iOS, so
+ * taps would be lost. Keyboard activation still works via click (detail === 0).
+ */
+export function onPress(node, fn) {
+  let last = 0;
+  node.addEventListener('pointerdown', (e) => {
+    if (e.button > 0) return;
+    const now = performance.now();
+    if (now - last < 250) return; // ignore palm / double contacts
+    last = now;
+    fn(e);
+  });
+  node.addEventListener('click', (e) => { if (e.detail === 0) fn(e); });
+}
+
 export function el(tag, props = {}, ...children) {
   const node = document.createElement(tag);
   for (const [k, v] of Object.entries(props)) {
     if (k === 'class') node.className = v;
     else if (k === 'style') Object.assign(node.style, v);
+    else if (k === 'onpress') onPress(node, v);
     else if (k.startsWith('on')) node.addEventListener(k.slice(2), v);
     else node.setAttribute(k, v);
   }
@@ -26,7 +44,7 @@ export function visual(item) {
 }
 
 export function card(item, onTap) {
-  return el('button', { class: 'card', type: 'button', 'aria-label': item.names.en, onclick: onTap }, visual(item));
+  return el('button', { class: 'card', type: 'button', 'aria-label': item.names.en, onpress: onTap }, visual(item));
 }
 
 export function replayAnimation(node, cls) {
