@@ -1,7 +1,11 @@
 // All learnable content. To add a word, add an item with en/fr/de names.
 // Visual is one of: { emoji }, { color }, { dots } (number of dots + digit).
 
-const item = (id, visual, en, fr, de) => ({ id, ...visual, names: { en, fr, de } });
+// `cry` (optional): [en, fr, de] onomatopoeia played on a second tap (animals).
+const item = (id, visual, en, fr, de, cry) => ({
+  id, ...visual, names: { en, fr, de },
+  ...(cry && { cry: { en: cry[0], fr: cry[1], de: cry[2] } }),
+});
 
 export const CATEGORIES = [
   {
@@ -26,18 +30,18 @@ export const CATEGORIES = [
     icon: '🐶',
     names: { en: 'Animals', fr: 'Animaux', de: 'Tiere' },
     items: [
-      item('dog', { emoji: '🐶' }, 'dog', 'le chien', 'der Hund'),
-      item('cat', { emoji: '🐱' }, 'cat', 'le chat', 'die Katze'),
-      item('cow', { emoji: '🐮' }, 'cow', 'la vache', 'die Kuh'),
-      item('horse', { emoji: '🐴' }, 'horse', 'le cheval', 'das Pferd'),
-      item('pig', { emoji: '🐷' }, 'pig', 'le cochon', 'das Schwein'),
-      item('sheep', { emoji: '🐑' }, 'sheep', 'le mouton', 'das Schaf'),
-      item('duck', { emoji: '🦆' }, 'duck', 'le canard', 'die Ente'),
-      item('chicken', { emoji: '🐔' }, 'chicken', 'la poule', 'das Huhn'),
-      item('frog', { emoji: '🐸' }, 'frog', 'la grenouille', 'der Frosch'),
-      item('fish', { emoji: '🐟' }, 'fish', 'le poisson', 'der Fisch'),
-      item('elephant', { emoji: '🐘' }, 'elephant', "l'éléphant", 'der Elefant'),
-      item('lion', { emoji: '🦁' }, 'lion', 'le lion', 'der Löwe'),
+      item('dog', { emoji: '🐶' }, 'dog', 'le chien', 'der Hund', ['Woof woof!', 'Ouaf ouaf !', 'Wau wau!']),
+      item('cat', { emoji: '🐱' }, 'cat', 'le chat', 'die Katze', ['Meow!', 'Miaou !', 'Miau!']),
+      item('cow', { emoji: '🐮' }, 'cow', 'la vache', 'die Kuh', ['Moo!', 'Meuh !', 'Muh!']),
+      item('horse', { emoji: '🐴' }, 'horse', 'le cheval', 'das Pferd', ['Neigh!', 'Hiiii hiii !', 'Iiih iiih!']),
+      item('pig', { emoji: '🐷' }, 'pig', 'le cochon', 'das Schwein', ['Oink oink!', 'Grouin grouin !', 'Grunz grunz!']),
+      item('sheep', { emoji: '🐑' }, 'sheep', 'le mouton', 'das Schaf', ['Baa baa!', 'Bêê bêê !', 'Mäh mäh!']),
+      item('duck', { emoji: '🦆' }, 'duck', 'le canard', 'die Ente', ['Quack quack!', 'Coin coin !', 'Quak quak!']),
+      item('chicken', { emoji: '🐔' }, 'chicken', 'la poule', 'das Huhn', ['Cluck cluck!', 'Cot cot cot !', 'Gack gack!']),
+      item('frog', { emoji: '🐸' }, 'frog', 'la grenouille', 'der Frosch', ['Ribbit!', 'Coa coa !', 'Quak quak!']),
+      item('fish', { emoji: '🐟' }, 'fish', 'le poisson', 'der Fisch', ['Blub blub!', 'Blub blub !', 'Blubb blubb!']),
+      item('elephant', { emoji: '🐘' }, 'elephant', "l'éléphant", 'der Elefant', ['Toot toot!', 'Prrrout !', 'Töröö!']),
+      item('lion', { emoji: '🦁' }, 'lion', 'le lion', 'der Löwe', ['Roar!', 'Grrrr !', 'Roaar!']),
     ],
   },
   {

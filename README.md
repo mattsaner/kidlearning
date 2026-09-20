@@ -10,7 +10,7 @@ Built for a 20‑month‑old: giant tap targets, spoken words, cheerful animatio
 
 | Mode | What happens |
 | --- | --- |
-| 👆 **Explore** | Tap a picture: it bounces, and the word is spoken and shown in large letters. |
+| 👆 **Explore** | Tap a picture: it bounces, and the word is spoken and shown in large letters. For **animals**, the first tap shows a pulsing 🔊 badge meaning "tap again to hear the cry"; the second tap plays the animal's cry ("Ouaf ouaf !", "Meuh !"…) and resets. |
 | 🔍 **Find it!** | The game says "Find the dog!" and shows 2–4 pictures. Right answer → confetti. Wrong answer → a gentle wobble and the prompt repeats. |
 
 Categories: 🎨 Colors · 🐶 Animals · 🍎 Fruits & veggies · 🔢 Numbers & shapes
@@ -59,10 +59,11 @@ Words are spoken with the browser's built-in text-to-speech (Web Speech API). Vo
 To use **your own voice** (toddlers love that), record short clips and drop them in:
 
 ```
-assets/audio/<lang>/<item-id>.mp3     e.g. assets/audio/fr/dog.mp3
+assets/audio/<lang>/<item-id>.mp3         e.g. assets/audio/fr/dog.mp3        (the word)
+assets/audio/<lang>/<item-id>-cry.mp3     e.g. assets/audio/fr/dog-cry.mp3    (the animal cry)
 ```
 
-Item ids are listed in `js/data.js`. Missing files automatically fall back to text-to-speech.
+Item ids are listed in `js/data.js`. Missing files automatically fall back to text-to-speech (animal cries are then spoken as onomatopoeia). You can also drop a real animal sound in as `<item-id>-cry.mp3`.
 
 ## Adding words or languages
 

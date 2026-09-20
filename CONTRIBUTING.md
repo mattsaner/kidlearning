@@ -7,7 +7,7 @@ In `js/data.js`, add a line to a category's `items`:
 item('rabbit', { emoji: '🐰' }, 'rabbit', 'le lapin', 'das Kaninchen'),
 ```
 
-Arguments: `id`, visual (`{ emoji }`, `{ color }` or `{ dots }`), then the English, French and German names.
+Arguments: `id`, visual (`{ emoji }`, `{ color }` or `{ dots }`), then the English, French and German names, and optionally `['en cry', 'fr cry', 'de cry']` for animals (played on a second tap).
 Use the article in French/German for nouns ("le chien", "der Hund"); colors and numbers have none.
 
 ## Add a category

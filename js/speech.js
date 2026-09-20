@@ -11,13 +11,13 @@ function pickVoice(lang) {
   return voices.find((v) => v.lang === lang) || voices.find((v) => v.lang.startsWith(prefix));
 }
 
-function speakTts(text) {
+function speakTts(text, { rate = 0.8, pitch = 1.15 } = {}) {
   if (!('speechSynthesis' in window)) return;
   window.speechSynthesis.cancel();
   const u = new SpeechSynthesisUtterance(text);
   u.lang = speechLang();
-  u.rate = 0.8;
-  u.pitch = 1.15;
+  u.rate = rate;
+  u.pitch = pitch;
   const voice = pickVoice(u.lang);
   if (voice) u.voice = voice;
   window.speechSynthesis.speak(u);
@@ -27,13 +27,13 @@ function speakTts(text) {
  * Speak a word. If assets/audio/<lang>/<id>.mp3 exists it is used (parents can
  * record their own voice); otherwise the browser's text-to-speech is used.
  */
-export function speak(text, id) {
+export function speak(text, id, opts) {
   if (!settings.sound) return;
   window.speechSynthesis?.cancel();
   audio?.pause();
-  if (!id) return speakTts(text);
+  if (!id) return speakTts(text, opts);
   const a = new Audio(`assets/audio/${settings.lang}/${id}.mp3`);
-  a.addEventListener('error', () => speakTts(text), { once: true });
+  a.addEventListener('error', () => speakTts(text, opts), { once: true });
   audio = a;
   a.play().catch(() => {});
 }
