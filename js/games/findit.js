@@ -8,10 +8,11 @@ export function startFindIt(root, category) {
   let last = null;
   let timer;
   let currentPrompt = () => {};
+  const promptText = el('div', { class: 'word' }, '\u00a0');
   const board = el('div', { class: 'board' });
   const replay = el('button', { class: 'replay', type: 'button', 'aria-label': 'Replay' }, '🔊');
   onPress(replay, () => currentPrompt());
-  root.append(replay, board);
+  root.append(replay, promptText, board);
 
   function round() {
     const pool = category.items.filter((i) => i.id !== last);
@@ -21,6 +22,8 @@ export function startFindIt(root, category) {
     const others = shuffle(category.items.filter((i) => i.id !== target.id)).slice(0, n - 1);
     const prompt = () => speak(t().find(target.names[settings.lang]));
     currentPrompt = prompt;
+    // Sound off: show the prompt as text so the game can still be played
+    promptText.textContent = settings.sound ? '\u00a0' : t().find(target.names[settings.lang]);
 
     let locked = false;
     board.replaceChildren(

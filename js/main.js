@@ -101,6 +101,12 @@ function openSettings() {
           type: 'button', class: `chip${settings.sound ? ' on' : ''}`,
           onclick: () => { settings.sound = !settings.sound; saveSettings(); render(); },
         }, settings.sound ? '🔊 ON' : '🔇 OFF')),
+      el('h3', {}, t().drawSound),
+      el('div', { class: 'row' },
+        el('button', {
+          type: 'button', class: `chip${settings.drawSound ? ' on' : ''}`,
+          onclick: () => { settings.drawSound = !settings.drawSound; saveSettings(); render(); },
+        }, settings.drawSound ? '🔊 ON' : '🔇 OFF')),
       el('h3', {}, t().choices),
       el('div', { class: 'row' }, ...[2, 3, 4].map((n) =>
         el('button', {

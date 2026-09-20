@@ -4,7 +4,7 @@ Kid Learning is intentionally **dependency-free**: no npm packages, no CDN scrip
 
 A machine-readable [CycloneDX 1.5](https://cyclonedx.org/) version is in [`sbom.cdx.json`](sbom.cdx.json).
 
-_Last reviewed: 2026-09-20 · Version: 1.0.6_
+_Last reviewed: 2026-09-20 · Version: 1.1.0_
 
 ## 1. Application
 

@@ -3,19 +3,19 @@ import { LANGUAGES } from './data.js';
 const STRINGS = {
   en: {
     explore: 'Explore', findit: 'Find it!', sounds: 'Sounds', draw: 'Drawing', settings: 'Settings', language: 'Language',
-    sound: 'Sound', back: 'Back', holdHint: 'Hold to open (parents)', category: 'Category',
+    sound: 'Sound', drawSound: 'Drawing sound', back: 'Back', holdHint: 'Hold to open (parents)', category: 'Category',
     find: (w) => `Find ${w}!`, yes: ['Yes!', 'Well done!', 'Bravo!', 'Great!'],
     close: 'Close', mode: 'Game', choices: 'Choices per round',
   },
   fr: {
     explore: 'Explorer', findit: 'Trouve !', sounds: 'Sons', draw: 'Dessin', settings: 'Réglages', language: 'Langue',
-    sound: 'Son', back: 'Retour', holdHint: 'Maintenir pour ouvrir (parents)', category: 'Catégorie',
+    sound: 'Son', drawSound: 'Son du dessin', back: 'Retour', holdHint: 'Maintenir pour ouvrir (parents)', category: 'Catégorie',
     find: (w) => `Trouve ${w} !`, yes: ['Oui !', 'Bravo !', 'Super !', 'Bien joué !'],
     close: 'Fermer', mode: 'Jeu', choices: 'Choix par tour',
   },
   de: {
     explore: 'Entdecken', findit: 'Finde es!', sounds: 'Geräusche', draw: 'Malen', settings: 'Einstellungen', language: 'Sprache',
-    sound: 'Ton', back: 'Zurück', holdHint: 'Gedrückt halten (Eltern)', category: 'Kategorie',
+    sound: 'Ton', drawSound: 'Ton beim Malen', back: 'Zurück', holdHint: 'Gedrückt halten (Eltern)', category: 'Kategorie',
     find: (w) => `Finde ${w}!`, yes: ['Ja!', 'Bravo!', 'Super!', 'Toll gemacht!'],
     close: 'Schließen', mode: 'Spiel', choices: 'Auswahl pro Runde',
   },
@@ -23,7 +23,7 @@ const STRINGS = {
 
 const KEY = 'kidlearning.settings';
 const DEFAULT_LANG = 'fr';
-const defaults = { lang: DEFAULT_LANG, sound: true, choices: 2 };
+const defaults = { lang: DEFAULT_LANG, sound: true, drawSound: true, choices: 2 };
 
 export const settings = { ...defaults };
 

@@ -1,6 +1,6 @@
-import { el, holdButton, confetti } from '../ui.js';
+import { el, holdButton, confetti, replayAnimation } from '../ui.js';
 import { speak } from '../speech.js';
-import { settings, t, pick } from '../i18n.js';
+import { settings, saveSettings, t, pick } from '../i18n.js';
 import { CATEGORIES } from '../data.js';
 
 // Colouring mode. The child scribbles anywhere; the colour is chosen by the
@@ -106,8 +106,17 @@ export function startPaint(root, drawing) {
   // --- DOM
   const paint = document.createElement('canvas');
   const lines = document.createElement('canvas');
-  const wrap = el('div', { class: 'paint-wrap' }, paint, lines);
-  root.append(wrap, holdButton('🗑️', 1000, clearAll, t().holdHint));
+  const caption = el('div', { class: 'paint-caption' });
+  const wrap = el('div', { class: 'paint-wrap' }, paint, lines, caption);
+  // Quick mute for this mode (short hold, so a toddler doesn't toggle it by accident).
+  const muteBtn = holdButton(settings.drawSound ? '🔊' : '🔇', 700, () => {
+    settings.drawSound = !settings.drawSound;
+    saveSettings();
+    muteBtn.textContent = settings.drawSound ? '🔊' : '🔇';
+    if (!settings.drawSound) window.speechSynthesis?.cancel();
+  }, t().drawSound);
+  muteBtn.classList.add('sound-toggle');
+  root.append(wrap, muteBtn, holdButton('🗑️', 1000, clearAll, t().holdHint));
   const pctx = paint.getContext('2d');
 
   const withClip = (region, fn) => {
@@ -170,7 +179,7 @@ export function startPaint(root, drawing) {
     if (done.every(Boolean) && !finished) {
       finished = true;
       confetti(toScreen(50, 50), 40);
-      speak(pick(t().yes));
+      if (loud()) speak(pick(t().yes));
     } else {
       confetti(toScreen(x, y), 8);
     }
@@ -187,11 +196,27 @@ export function startPaint(root, drawing) {
     if (!done[ri] && (total[ri] === 0 || painted[ri].size >= Math.ceil(total[ri] * AUTOFILL))) complete(ri, x, y);
   }
 
+  const loud = () => settings.sound && settings.drawSound;
+
+  // Silent mode: show the color name as a pill of that color instead of saying it.
+  let captionTimer;
+  function showCaption(color) {
+    caption.textContent = color.names[settings.lang];
+    caption.style.background = color.color;
+    const [r, g, b] = [1, 3, 5].map((i) => parseInt(color.color.slice(i, i + 2), 16));
+    caption.style.color = r * 0.299 + g * 0.587 + b * 0.114 > 150 ? INK : '#fff';
+    replayAnimation(caption, 'pop');
+    caption.classList.add('show');
+    clearTimeout(captionTimer);
+    captionTimer = setTimeout(() => caption.classList.remove('show'), 1400);
+  }
+
   function announce(ri) {
+    const color = regions[ri].color;
+    if (!loud()) return showCaption(color);
     const now = performance.now();
     if (now - lastSpoken < 1500) return;
     lastSpoken = now;
-    const color = regions[ri].color;
     speak(color.names[settings.lang], color.id);
   }
 
@@ -244,5 +269,5 @@ export function startPaint(root, drawing) {
 
   layout();
   window.addEventListener('resize', layout);
-  return () => window.removeEventListener('resize', layout);
+  return () => { window.removeEventListener('resize', layout); clearTimeout(captionTimer); };
 }
