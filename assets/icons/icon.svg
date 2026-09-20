@@ -1,1 +1,15 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><rect width="512" height="512" fill="#ffb703"/><circle cx="256" cy="256" r="150" fill="#fff4d6"/><text x="256" y="310" font-size="170" text-anchor="middle">🐻</text></svg>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <rect width="512" height="512" fill="#ffb703"/>
+  <circle cx="140" cy="150" r="54" fill="#8d5524"/>
+  <circle cx="372" cy="150" r="54" fill="#8d5524"/>
+  <circle cx="140" cy="150" r="28" fill="#e8b98a"/>
+  <circle cx="372" cy="150" r="28" fill="#e8b98a"/>
+  <circle cx="256" cy="272" r="158" fill="#8d5524"/>
+  <ellipse cx="256" cy="330" rx="76" ry="58" fill="#f2d2a9"/>
+  <circle cx="204" cy="250" r="17" fill="#3d2c1e"/>
+  <circle cx="308" cy="250" r="17" fill="#3d2c1e"/>
+  <circle cx="211" cy="243" r="5" fill="#fff"/>
+  <circle cx="315" cy="243" r="5" fill="#fff"/>
+  <ellipse cx="256" cy="304" rx="24" ry="17" fill="#3d2c1e"/>
+  <path d="M256 320 v18 M256 338 q-20 22 -40 6 M256 338 q20 22 40 6" fill="none" stroke="#3d2c1e" stroke-width="7" stroke-linecap="round"/>
+</svg>

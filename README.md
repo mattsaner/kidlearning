@@ -20,6 +20,14 @@ Categories: 🖍️ Drawing (own tile on the home screen) · 🎨 Colors · 🐶
 ### Toddler-proof touch handling
 Little hands press hard, hold, slide and rest a palm on the screen, so the game reacts the moment a finger **touches** a picture (no clean "tap" needed) and blocks pinch-zoom, double-tap zoom, text selection and long-press menus (also on iPad, where Safari ignores \`user-scalable=no\`). Scrolling with one finger still works.
 
+### Keeping your child in the game (iPad / iPhone)
+A web page cannot lock the device, so combine these:
+
+1. **Install it as an app.** In Safari: Share → **Add to Home Screen**, then always open the game from that icon. It runs full screen, with no address bar, tabs or links to tap. (If you added it before, remove the old icon and add it again to get the new one.)
+2. **Turn on Guided Access**, the iPad's built-in kiosk mode: *Settings → Accessibility → Guided Access* → on, set a passcode. Then open the game and **triple-click the top button** (or the Home button) → *Start*. Home, app switching and system swipes are disabled until you triple-click again and enter the passcode. In *Options* you can also set a time limit.
+3. Full step-by-step guide (English, français, Deutsch): [docs/GUIDED-ACCESS.md](docs/GUIDED-ACCESS.md).
+4. The game itself blocks the edge-swipe "back" gesture, pinch-zoom, text selection and long-press menus, and has no links except in the parent-only credits screen.
+
 ### Play-time tracking
 A faint counter (⏱ 12:30) at the bottom of every screen shows how long your child has played **today**. It only counts *active* play: it starts at the first touch, pauses when the app is in the background and stops after a minute without touches. The daily total is stored on the device and resets each day.
 

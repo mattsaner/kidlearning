@@ -147,6 +147,8 @@ function openSettings() {
           type: 'button', class: `chip${settings.choices === n ? ' on' : ''}`,
           onclick: () => { settings.choices = n; saveSettings(); render(); },
         }, String(n)))),
+      // Tip for parents when the game runs inside the normal browser (with address bar, tabs...)
+      ...(navigator.standalone || matchMedia('(display-mode: standalone)').matches ? [] : [el('p', { class: 'stats' }, t().kidLockTip)]),
       el('button', { type: 'button', class: 'chip', style: { marginTop: '16px' }, onclick: () => { view = 'credits'; render(); } }, `ℹ️ ${t().credits}`),
       el('button', {
         type: 'button', class: 'chip close',
@@ -189,6 +191,10 @@ function timesUp() {
   document.body.append(overlay);
   speak(t().timesUp);
 }
+
+// Edge-swipe "back" must not leave the game: keep one extra history entry and re-add it.
+history.pushState({ kidlearning: true }, '', location.href);
+window.addEventListener('popstate', () => history.pushState({ kidlearning: true }, '', location.href));
 
 loadSettings();
 startPlaytime(() => {
