@@ -67,7 +67,7 @@ To use **your own voice** (toddlers love that), record short clips and drop them
 assets/audio/<lang>/<item-id>.mp3         e.g. assets/audio/fr/dog.mp3        (the word)
 ```
 
-Item ids are listed in `js/data.js`. Missing files automatically fall back to text-to-speech.
+Item ids are listed in `js/data.js`. Then **list each id** in `assets/audio/manifest.json` (e.g. `{ "fr": ["dog", "cat"] }`) so the game knows the file exists; anything not listed uses text-to-speech.
 
 Animal cries are real recordings in `assets/audio/cries/<item-id>.mp3` (same for every language). Replace a file to use your own recording. Credits and licenses for the bundled recordings are in [assets/audio/cries/CREDITS.md](assets/audio/cries/CREDITS.md).
 

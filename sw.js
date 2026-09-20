@@ -1,9 +1,9 @@
-const CACHE = 'kidlearning-v4';
+const CACHE = 'kidlearning-v5';
 const ASSETS = [
   './', 'index.html', 'css/style.css', 'manifest.webmanifest', 'assets/icons/icon.svg',
   'js/main.js', 'js/data.js', 'js/i18n.js', 'js/speech.js', 'js/ui.js', 'js/version.js',
   'js/games/explore.js', 'js/games/findit.js', 'js/games/sounds.js', 'js/games/paint.js', 'js/drawings.js',
-  'assets/audio/cries/dog.mp3', 'assets/audio/cries/cat.mp3', 'assets/audio/cries/cow.mp3', 'assets/audio/cries/horse.mp3', 'assets/audio/cries/pig.mp3', 'assets/audio/cries/sheep.mp3', 'assets/audio/cries/duck.mp3', 'assets/audio/cries/chicken.mp3', 'assets/audio/cries/frog.mp3', 'assets/audio/cries/elephant.mp3', 'assets/audio/cries/fish.mp3', 'assets/audio/cries/lion.mp3',
+  'assets/audio/cries/dog.mp3', 'assets/audio/manifest.json', 'assets/audio/cries/cat.mp3', 'assets/audio/cries/cow.mp3', 'assets/audio/cries/horse.mp3', 'assets/audio/cries/pig.mp3', 'assets/audio/cries/sheep.mp3', 'assets/audio/cries/duck.mp3', 'assets/audio/cries/chicken.mp3', 'assets/audio/cries/frog.mp3', 'assets/audio/cries/elephant.mp3', 'assets/audio/cries/fish.mp3', 'assets/audio/cries/lion.mp3',
 ];
 
 self.addEventListener('install', (e) => {
