@@ -5,7 +5,8 @@ import { settings } from '../i18n.js';
 /**
  * Tap a picture to hear its name. For items with a `cry` (animals) the first
  * tap "arms" the card (a pulsing 🔊 badge shows that the next tap plays the
- * animal's cry); tapping it again plays the cry and resets. Tapping another
+ * animal's cry); tapping it again speaks the animal's cry (text-to-speech) and resets.
+ * (Real recordings live in the separate Sounds mode.) Tapping another
  * card also resets.
  */
 export function startExplore(root, category) {
@@ -28,7 +29,7 @@ export function startExplore(root, category) {
         const cry = item.cry[settings.lang];
         disarm();
         word.textContent = cry;
-        speak(cry, `${item.id}-cry`, { rate: 0.95, pitch: 1.4 });
+        speak(cry, undefined, { rate: 0.9, pitch: 1.35 });
         return;
       }
 

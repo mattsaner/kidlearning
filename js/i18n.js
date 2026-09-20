@@ -2,19 +2,19 @@ import { LANGUAGES } from './data.js';
 
 const STRINGS = {
   en: {
-    explore: 'Explore', findit: 'Find it!', settings: 'Settings', language: 'Language',
+    explore: 'Explore', findit: 'Find it!', sounds: 'Sounds', settings: 'Settings', language: 'Language',
     sound: 'Sound', back: 'Back', holdHint: 'Hold to open (parents)', category: 'Category',
     find: (w) => `Find ${w}!`, yes: ['Yes!', 'Well done!', 'Bravo!', 'Great!'],
     close: 'Close', mode: 'Game', choices: 'Choices per round',
   },
   fr: {
-    explore: 'Explorer', findit: 'Trouve !', settings: 'Réglages', language: 'Langue',
+    explore: 'Explorer', findit: 'Trouve !', sounds: 'Sons', settings: 'Réglages', language: 'Langue',
     sound: 'Son', back: 'Retour', holdHint: 'Maintenir pour ouvrir (parents)', category: 'Catégorie',
     find: (w) => `Trouve ${w} !`, yes: ['Oui !', 'Bravo !', 'Super !', 'Bien joué !'],
     close: 'Fermer', mode: 'Jeu', choices: 'Choix par tour',
   },
   de: {
-    explore: 'Entdecken', findit: 'Finde es!', settings: 'Einstellungen', language: 'Sprache',
+    explore: 'Entdecken', findit: 'Finde es!', sounds: 'Geräusche', settings: 'Einstellungen', language: 'Sprache',
     sound: 'Ton', back: 'Zurück', holdHint: 'Gedrückt halten (Eltern)', category: 'Kategorie',
     find: (w) => `Finde ${w}!`, yes: ['Ja!', 'Bravo!', 'Super!', 'Toll gemacht!'],
     close: 'Schließen', mode: 'Spiel', choices: 'Auswahl pro Runde',

@@ -5,6 +5,7 @@ import { speak } from './speech.js';
 import { VERSION, BUILD } from './version.js';
 import { startExplore } from './games/explore.js';
 import { startFindIt } from './games/findit.js';
+import { startSounds } from './games/sounds.js';
 
 const app = document.getElementById('app');
 let cleanup = null;
@@ -42,6 +43,8 @@ function categoryScreen(cat) {
     const modes = [
       { icon: '👆', label: t().explore, run: startExplore },
       { icon: '🔍', label: t().findit, run: startFindIt },
+      // Real animal recordings: only for categories that have them
+      ...(cat.items.some((i) => i.cry) ? [{ icon: '🔊', label: t().sounds, run: startSounds }] : []),
     ];
     const grid = el('div', { class: 'menu' });
     for (const m of modes) {

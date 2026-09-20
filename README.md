@@ -10,7 +10,8 @@ Built for a 20‑month‑old: giant tap targets, spoken words, cheerful animatio
 
 | Mode | What happens |
 | --- | --- |
-| 👆 **Explore** | Tap a picture: it bounces, and the word is spoken and shown in large letters. For **animals**, the first tap shows a pulsing 🔊 badge meaning "tap again to hear the cry"; the second tap plays the animal's cry ("Ouaf ouaf !", "Meuh !"…) and resets. |
+| 👆 **Explore** | Tap a picture: it bounces, and the word is spoken and shown in large letters. For **animals**, the first tap shows a pulsing 🔊 badge meaning "tap again to hear the cry"; the second tap has the voice say the animal's cry ("Ouaf ouaf !", "Meuh !") and resets. |
+| 🔊 **Sounds** (animals only) | Tap an animal to hear a **real recording** of its sound, with the written cry as caption. The fish makes a bubbly "blub blub" (fish are silent). |
 | 🔍 **Find it!** | The game says "Find the dog!" and shows 2–4 pictures. Right answer → confetti. Wrong answer → a gentle wobble and the prompt repeats. |
 
 Categories: 🎨 Colors · 🐶 Animals · 🍎 Fruits & veggies · 🔢 Numbers & shapes
@@ -60,10 +61,11 @@ To use **your own voice** (toddlers love that), record short clips and drop them
 
 ```
 assets/audio/<lang>/<item-id>.mp3         e.g. assets/audio/fr/dog.mp3        (the word)
-assets/audio/<lang>/<item-id>-cry.mp3     e.g. assets/audio/fr/dog-cry.mp3    (the animal cry)
 ```
 
-Item ids are listed in `js/data.js`. Missing files automatically fall back to text-to-speech (animal cries are then spoken as onomatopoeia). You can also drop a real animal sound in as `<item-id>-cry.mp3`.
+Item ids are listed in `js/data.js`. Missing files automatically fall back to text-to-speech.
+
+Animal cries are real recordings in `assets/audio/cries/<item-id>.mp3` (same for every language). Replace a file to use your own recording. Credits and licenses for the bundled recordings are in [assets/audio/cries/CREDITS.md](assets/audio/cries/CREDITS.md).
 
 ## Adding words or languages
 
@@ -78,7 +80,7 @@ js/data.js          all words (en / fr / de) and languages
 js/i18n.js          UI strings + saved settings
 js/speech.js        text-to-speech / custom audio
 js/ui.js            DOM helpers, confetti, hold-to-open button
-js/games/           Explore and Find-it modes
+js/games/           Explore, Find-it and Sounds modes
 sw.js, manifest…    offline / installable app
 ```
 

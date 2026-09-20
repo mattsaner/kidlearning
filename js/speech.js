@@ -37,3 +37,12 @@ export function speak(text, id, opts) {
   audio = a;
   a.play().catch(() => {});
 }
+
+/** Play the real recording of an animal's cry (assets/audio/cries/<id>.mp3). */
+export function playCry(id) {
+  if (!settings.sound) return;
+  window.speechSynthesis?.cancel();
+  audio?.pause();
+  audio = new Audio(`assets/audio/cries/${id}.mp3`);
+  audio.play().catch(() => {});
+}

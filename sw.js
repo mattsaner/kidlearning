@@ -1,8 +1,9 @@
-const CACHE = 'kidlearning-v1';
+const CACHE = 'kidlearning-v3';
 const ASSETS = [
   './', 'index.html', 'css/style.css', 'manifest.webmanifest', 'assets/icons/icon.svg',
   'js/main.js', 'js/data.js', 'js/i18n.js', 'js/speech.js', 'js/ui.js', 'js/version.js',
-  'js/games/explore.js', 'js/games/findit.js',
+  'js/games/explore.js', 'js/games/findit.js', 'js/games/sounds.js',
+  'assets/audio/cries/dog.mp3', 'assets/audio/cries/cat.mp3', 'assets/audio/cries/cow.mp3', 'assets/audio/cries/horse.mp3', 'assets/audio/cries/pig.mp3', 'assets/audio/cries/sheep.mp3', 'assets/audio/cries/duck.mp3', 'assets/audio/cries/chicken.mp3', 'assets/audio/cries/frog.mp3', 'assets/audio/cries/elephant.mp3', 'assets/audio/cries/fish.mp3', 'assets/audio/cries/lion.mp3',
 ];
 
 self.addEventListener('install', (e) => {
@@ -18,8 +19,32 @@ self.addEventListener('activate', (e) => {
 });
 
 // Network first, fall back to cache (so updates show up, but works offline).
+// Safari asks for media with Range headers and needs a proper 206 answer,
+// so serve cached audio by slicing the cached file.
+async function rangeFromCache(request) {
+  const cached = await caches.match(request.url);
+  if (!cached) return fetch(request);
+  const buf = await cached.arrayBuffer();
+  const m = /bytes=(\d+)-(\d*)/.exec(request.headers.get('range'));
+  if (!m) return cached;
+  const start = Number(m[1]);
+  const end = m[2] ? Math.min(Number(m[2]), buf.byteLength - 1) : buf.byteLength - 1;
+  return new Response(buf.slice(start, end + 1), {
+    status: 206,
+    headers: {
+      'Content-Type': cached.headers.get('Content-Type') || 'audio/mpeg',
+      'Content-Range': `bytes ${start}-${end}/${buf.byteLength}`,
+      'Content-Length': String(end - start + 1),
+    },
+  });
+}
+
 self.addEventListener('fetch', (e) => {
   if (e.request.method !== 'GET') return;
+  if (e.request.headers.has('range')) {
+    e.respondWith(rangeFromCache(e.request));
+    return;
+  }
   e.respondWith(
     fetch(e.request)
       .then((res) => {

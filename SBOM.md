@@ -4,7 +4,7 @@ Kid Learning is intentionally **dependency-free**: no npm packages, no CDN scrip
 
 A machine-readable [CycloneDX 1.5](https://cyclonedx.org/) version is in [`sbom.cdx.json`](sbom.cdx.json).
 
-_Last reviewed: 2026-09-20 · Version: 1.0.1_
+_Last reviewed: 2026-09-20 · Version: 1.0.3_
 
 ## 1. Application
 
@@ -23,6 +23,7 @@ Content that is not code:
 | Emoji pictures (animals, fruit, shapes) | Rendered by the user's operating system / browser emoji font | Governed by the OS font vendor; not redistributed by this repo |
 | Word lists and translations (EN / FR / DE) | Written for this project (`js/data.js`) | MIT |
 | App icon (`assets/icons/icon.svg`) | Written for this project; uses a 🐻 emoji glyph rendered by the OS | MIT |
+| Animal cries (`assets/audio/cries/*.mp3`) | Recordings from Wikimedia Commons, adapted (trimmed, converted); see [credits](assets/audio/cries/CREDITS.md) | CC0, public domain, CC BY 3.0, CC BY-SA 3.0 / 4.0 (per file). BY / BY-SA files require the attribution in the credits file |
 | Fonts | System fonts only (`Trebuchet MS`, `Comic Sans MS`, `system-ui`) | Nothing is downloaded |
 
 ## 3. Browser platform APIs used
