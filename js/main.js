@@ -8,6 +8,7 @@ import { startFindIt } from './games/findit.js';
 import { startSounds } from './games/sounds.js';
 import { startPaint, thumbnail } from './games/paint.js';
 import { DRAWINGS } from './drawings.js';
+import { playtime, startPlaytime, fmt } from './playtime.js';
 
 const app = document.getElementById('app');
 let cleanup = null;
@@ -107,6 +108,19 @@ function openSettings() {
           type: 'button', class: `chip${settings.drawSound ? ' on' : ''}`,
           onclick: () => { settings.drawSound = !settings.drawSound; saveSettings(); render(); },
         }, settings.drawSound ? '🔊 ON' : '🔇 OFF')),
+      el('h3', {}, t().playTime),
+      el('div', { class: 'row' }, ...[0, 5, 10, 15, 20, 30].map((n) =>
+        el('button', {
+          type: 'button', class: `chip${settings.limitMin === n ? ' on' : ''}`,
+          onclick: () => { settings.limitMin = n; saveSettings(); render(); },
+        }, n ? `${n} ${t().minutes}` : t().off))),
+      el('p', { class: 'stats' }, `${t().today}: ${fmt(playtime.today())} · ${t().session}: ${fmt(playtime.session())}`),
+      el('div', { class: 'row' },
+        el('button', {
+          type: 'button', class: `chip${settings.showTimer ? ' on' : ''}`,
+          onclick: () => { settings.showTimer = !settings.showTimer; saveSettings(); render(); updateTimer(); },
+        }, `⏱ ${t().showTimer}`),
+        el('button', { type: 'button', class: 'chip', onclick: () => { playtime.reset(); render(); updateTimer(); } }, `↺ ${t().resetToday}`)),
       el('h3', {}, t().choices),
       el('div', { class: 'row' }, ...[2, 3, 4].map((n) =>
         el('button', {
@@ -132,7 +146,36 @@ for (const ev of ['gesturestart', 'gesturechange', 'gestureend', 'dblclick', 'co
 }
 document.addEventListener('touchmove', (e) => { if (e.touches.length > 1) e.preventDefault(); }, { passive: false });
 
+// --- play time: a faint counter on every screen and an optional daily limit
+const timerEl = el('div', { class: 'timer' });
+document.body.append(timerEl);
+
+function updateTimer() {
+  const limit = playtime.limit();
+  timerEl.hidden = !settings.showTimer;
+  timerEl.textContent = `⏱ ${fmt(playtime.today())}${limit ? ` / ${fmt(limit)}` : ''}`;
+  timerEl.classList.toggle('warn', limit > 0 && limit - playtime.today() <= 120);
+}
+
+function timesUp() {
+  if (document.querySelector('.timesup')) return;
+  playtime.setBlocked(true);
+  window.speechSynthesis?.cancel();
+  const overlay = el('div', { class: 'timesup' },
+    el('div', { class: 'moon' }, '🌙'),
+    el('div', { class: 'msg' }, t().timesUp),
+    holdButton('🔓', 2000, () => { overlay.remove(); playtime.snooze(); playtime.setBlocked(false); updateTimer(); }, t().unlockHint));
+  document.body.append(overlay);
+  speak(t().timesUp);
+}
+
 loadSettings();
+startPlaytime(() => {
+  updateTimer();
+  const limit = playtime.limit();
+  if (limit && playtime.today() >= limit) timesUp();
+});
+updateTimer();
 home();
 
 if ('serviceWorker' in navigator && location.protocol.startsWith('http')) {

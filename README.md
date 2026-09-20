@@ -20,6 +20,11 @@ Categories: 🖍️ Drawing (own tile on the home screen) · 🎨 Colors · 🐶
 ### Toddler-proof touch handling
 Little hands press hard, hold, slide and rest a palm on the screen, so the game reacts the moment a finger **touches** a picture (no clean "tap" needed) and blocks pinch-zoom, double-tap zoom, text selection and long-press menus (also on iPad, where Safari ignores \`user-scalable=no\`). Scrolling with one finger still works.
 
+### Play-time tracking
+A faint counter (⏱ 12:30) at the bottom of every screen shows how long your child has played **today**. It only counts *active* play: it starts at the first touch, pauses when the app is in the background and stops after a minute without touches. The daily total is stored on the device and resets each day.
+
+If you set a **daily limit** in the settings, the counter shows `12:30 / 20:00` and turns red for the last two minutes. When the time is up, a friendly "See you tomorrow 🌙" screen covers the game (and says it out loud). A parent can press and hold the 🔓 button for 2 seconds to grant 5 more minutes.
+
 ### For parents: the settings page
 
 The settings are hidden behind a **press-and-hold** button so a toddler can't open them by accident.
@@ -37,6 +42,7 @@ The settings are hidden behind a **press-and-hold** button so a toddler can't op
 | Language | 🇬🇧 English · 🇫🇷 Français · 🇩🇪 Deutsch (changes the spoken words and the on-screen text; default: Français) |
 | Sound | 🔊 on / 🔇 off (everything; with sound off, *Find it!* shows its prompt as text) |
 | Drawing sound | 🔊 on / 🔇 off (only the drawing mode, also togglable in-game) |
+| Play time | Daily limit: off, 5, 10, 15, 20 or 30 minutes, plus today's / this session's time, a reset, and a show/hide switch for the timer |
 | Choices per round | 2, 3 or 4 pictures in *Find it!* (start with 2 for young toddlers) |
 
 Press **Close** (or <kbd>Esc</kbd>) to go back to the home screen. Settings are saved in the browser on that device, so they need to be set once per device. The default language is **French**.

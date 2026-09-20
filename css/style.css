@@ -85,6 +85,21 @@ button { font: inherit; color: inherit; cursor: pointer; }
   font-size: 11px; opacity: 0.3; pointer-events: none;
 }
 
+/* Play time */
+.timer {
+  position: fixed; left: 0; right: 0; bottom: max(2px, env(safe-area-inset-bottom)); text-align: center;
+  font-size: 12px; opacity: 0.35; pointer-events: none; z-index: 4; font-variant-numeric: tabular-nums;
+}
+.timer.warn { opacity: 1; color: #c1121f; font-weight: 700; }
+.timesup {
+  position: fixed; inset: 0; z-index: 1000; touch-action: none;
+  background: linear-gradient(#1d2b53, #3d2c6b); color: #fff;
+  display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 24px; padding: 24px; text-align: center;
+}
+.timesup .moon { font-size: clamp(96px, 30vmin, 220px); line-height: 1; }
+.timesup .msg { font-size: clamp(28px, 7vmin, 56px); font-weight: 800; max-width: 18em; }
+.settings .stats { margin: 10px 2px 8px; font-variant-numeric: tabular-nums; opacity: 0.8; }
+
 /* Cards */
 .grid {
   display: grid; gap: 14px; width: min(1000px, 100%);

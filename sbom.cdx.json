@@ -8,7 +8,7 @@
       "type": "application",
       "bom-ref": "kidlearning",
       "name": "kidlearning",
-      "version": "1.1.3",
+      "version": "1.2.0",
       "description": "Toddler-friendly browser game to learn colors, animals, fruits and numbers in English, French and German.",
       "licenses": [
         {
