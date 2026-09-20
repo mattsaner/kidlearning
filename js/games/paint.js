@@ -1,4 +1,4 @@
-import { el, holdButton, confetti, replayAnimation } from '../ui.js';
+import { el, holdButton, onPress, confetti, replayAnimation } from '../ui.js';
 import { speak } from '../speech.js';
 import { settings, saveSettings, t, pick } from '../i18n.js';
 import { CATEGORIES } from '../data.js';
@@ -112,15 +112,16 @@ export function startPaint(root, drawing) {
   const lines = document.createElement('canvas');
   const caption = el('div', { class: 'paint-caption' });
   const wrap = el('div', { class: 'paint-wrap' }, paint, lines, caption);
-  // Quick mute for this mode (short hold, so a toddler doesn't toggle it by accident).
-  const muteBtn = holdButton(settings.drawSound ? '🔊' : '🔇', 700, () => {
+  // Quick mute for this mode: a plain tap, easy to undo.
+  const muteBtn = el('button', { class: 'hold-btn sound-toggle', type: 'button', 'aria-label': t().drawSound, title: t().drawSound },
+    settings.drawSound ? '🔊' : '🔇');
+  onPress(muteBtn, () => {
     settings.drawSound = !settings.drawSound;
     saveSettings();
     muteBtn.textContent = settings.drawSound ? '🔊' : '🔇';
     if (!settings.drawSound) window.speechSynthesis?.cancel();
-  }, t().drawSound);
-  muteBtn.classList.add('sound-toggle');
-  root.append(wrap, muteBtn, holdButton('🗑️', 1000, clearAll, t().holdHint));
+  });
+  root.append(wrap, muteBtn, holdButton('🗑️', 800, clearAll, t().holdHint));
   const pctx = paint.getContext('2d');
 
   const withClip = (region, fn) => {

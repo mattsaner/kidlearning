@@ -6,7 +6,7 @@
  * taps would be lost. Keyboard activation still works via click (detail === 0).
  */
 export function onPress(node, fn) {
-  let last = 0;
+  let last = -Infinity;
   node.addEventListener('pointerdown', (e) => {
     if (e.button > 0) return;
     const now = performance.now();
@@ -78,10 +78,20 @@ export function confetti(origin, count = 22) {
 export function holdButton(label, ms, onHold, hint) {
   let timer;
   const btn = el('button', { class: 'hold-btn', type: 'button', 'aria-label': hint, title: hint }, label);
-  const start = (e) => { e.preventDefault(); btn.classList.add('holding'); timer = setTimeout(() => { btn.classList.remove('holding'); onHold(); }, ms); };
+  btn.style.setProperty('--hold', `${ms}ms`);
+  const start = (e) => {
+    e.preventDefault();
+    // keep the pointer on this button even if the finger drifts a little
+    try { btn.setPointerCapture(e.pointerId); } catch { /* not supported */ }
+    clearTimeout(timer);
+    btn.classList.remove('holding');
+    void btn.offsetWidth; // restart the progress animation
+    btn.classList.add('holding');
+    timer = setTimeout(() => { btn.classList.remove('holding'); onHold(); }, ms);
+  };
   const stop = () => { clearTimeout(timer); btn.classList.remove('holding'); };
   btn.addEventListener('pointerdown', start);
-  ['pointerup', 'pointerleave', 'pointercancel'].forEach((ev) => btn.addEventListener(ev, stop));
+  ['pointerup', 'pointercancel'].forEach((ev) => btn.addEventListener(ev, stop));
   btn.addEventListener('contextmenu', (e) => e.preventDefault());
   btn.addEventListener('keydown', (e) => { if (e.key === 'Enter') onHold(); });
   return btn;
