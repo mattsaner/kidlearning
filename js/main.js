@@ -9,6 +9,7 @@ import { startSounds } from './games/sounds.js';
 import { startPaint, thumbnail } from './games/paint.js';
 import { DRAWINGS } from './drawings.js';
 import { startBody } from './games/body.js';
+import { startHide } from './games/hide.js';
 import { playtime, startPlaytime, fmt } from './playtime.js';
 
 const app = document.getElementById('app');
@@ -40,6 +41,8 @@ function home() {
     grid.append(
       el('button', { class: 'tile', type: 'button', onpress: () => { speak(t().body); bodyScreen(); } },
         el('span', { class: 'tile-icon' }, '🧸'), el('span', { class: 'tile-label' }, t().body)),
+      el('button', { class: 'tile', type: 'button', onpress: () => { speak(t().hide); show((s2) => startHide(s2), { back: home }); } },
+        el('span', { class: 'tile-icon' }, '🙈'), el('span', { class: 'tile-label' }, t().hide)),
       el('button', { class: 'tile', type: 'button', onpress: () => { speak(t().draw); drawingChooser(); } },
         el('span', { class: 'tile-icon' }, '🖍️'), el('span', { class: 'tile-label' }, t().draw))
     );

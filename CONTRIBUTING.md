@@ -33,3 +33,6 @@ Bump `VERSION` in `js/version.js` (and `Version` in `SBOM.md`, `version` in `sbo
 
 ## Body parts
 The bear is defined in `js/bodyparts.js`: `BODY_PARTS` holds the names (en/fr/de, with the article), `BODY_REGIONS` the tappable shapes in painter's order, and `FIND_POOL` the parts asked in *Find it*. Keep shapes large: small hands.
+
+## Hide & seek
+`js/games/hide.js` hides a random animal from the *Animals* category (`js/data.js`) under 2–4 cups; add animals there and they join the game. The number of cups comes from the "choices per round" setting.
