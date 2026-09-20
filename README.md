@@ -81,6 +81,10 @@ js/games/           Explore and Find-it modes
 sw.js, manifest…    offline / installable app
 ```
 
+## Checking a deployment
+
+The home screen shows a tiny, faint label at the bottom-left, like `v1.0.0 · 14eedf5 2026-09-20`: the version, the deployed commit and the build date. Compare it with `git log -1 --short` to confirm the latest push is live (locally it shows `dev`). Bump `VERSION` in `js/version.js` for releases; the commit and date are stamped automatically by the workflow.
+
 ## Software Bill of Materials
 
 The project has no runtime dependencies. See [SBOM.md](SBOM.md) (human-readable) and [sbom.cdx.json](sbom.cdx.json) (CycloneDX).

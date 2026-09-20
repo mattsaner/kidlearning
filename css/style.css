@@ -51,6 +51,12 @@ button { font: inherit; color: inherit; cursor: pointer; touch-action: manipulat
 .hold-btn.holding { animation: fill 1.5s linear forwards; }
 @keyframes fill { to { background: var(--accent); transform: scale(1.3); opacity: 1; } }
 
+/* Discreet build info (check that a deployment went through) */
+.version {
+  position: fixed; left: max(12px, env(safe-area-inset-left)); bottom: max(8px, env(safe-area-inset-bottom));
+  font-size: 11px; opacity: 0.3; pointer-events: none;
+}
+
 /* Cards */
 .grid {
   display: grid; gap: 14px; width: min(1000px, 100%);

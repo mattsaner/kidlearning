@@ -2,6 +2,7 @@ import { CATEGORIES, LANGUAGES } from './data.js';
 import { settings, loadSettings, saveSettings, t } from './i18n.js';
 import { el, holdButton } from './ui.js';
 import { speak } from './speech.js';
+import { VERSION, BUILD } from './version.js';
 import { startExplore } from './games/explore.js';
 import { startFindIt } from './games/findit.js';
 
@@ -31,7 +32,8 @@ function home() {
         }, el('span', { class: 'tile-icon' }, cat.icon), el('span', { class: 'tile-label' }, cat.names[settings.lang]))
       );
     }
-    s.append(grid, holdButton('⚙️', 1500, openSettings, t().holdHint));
+    s.append(grid, holdButton('⚙️', 1500, openSettings, t().holdHint),
+      el('div', { class: 'version' }, `v${VERSION} · ${BUILD}`));
   });
 }
 

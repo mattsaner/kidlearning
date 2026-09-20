@@ -1,7 +1,7 @@
 const CACHE = 'kidlearning-v1';
 const ASSETS = [
   './', 'index.html', 'css/style.css', 'manifest.webmanifest', 'assets/icons/icon.svg',
-  'js/main.js', 'js/data.js', 'js/i18n.js', 'js/speech.js', 'js/ui.js',
+  'js/main.js', 'js/data.js', 'js/i18n.js', 'js/speech.js', 'js/ui.js', 'js/version.js',
   'js/games/explore.js', 'js/games/findit.js',
 ];
 

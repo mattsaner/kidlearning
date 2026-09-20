@@ -26,6 +26,8 @@ jobs:
         run: |
           mkdir _site
           cp -r index.html css js assets manifest.webmanifest sw.js _site/
+          # Stamp the build so the live site shows which commit is deployed
+          sed -i "s/BUILD = 'dev'/BUILD = '${GITHUB_SHA::7} $(date -u +%Y-%m-%d)'/" _site/js/version.js
       - uses: actions/configure-pages@v5
       - uses: actions/upload-pages-artifact@v3
         with:
