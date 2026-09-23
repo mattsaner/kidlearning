@@ -6,7 +6,7 @@ Its only third-party *content* is 12 animal sound recordings (below). This docum
 Machine-readable [CycloneDX 1.5](https://cyclonedx.org/) version: [`sbom.cdx.json`](sbom.cdx.json) (includes SHA-256 checksums and license links).
 There is no video in the project.
 
-_Last reviewed: 2026-09-20 · Version: 1.4.1_
+_Last reviewed: 2026-09-23 · Version: 1.5.0_
 
 ## 1. Application and first-party content
 

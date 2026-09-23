@@ -14,6 +14,7 @@ const band = (cx, cy, ro, ri) =>
   `M${cx - ro} ${cy}A${ro} ${ro} 0 0 1 ${cx + ro} ${cy}L${cx + ri} ${cy}A${ri} ${ri} 0 0 0 ${cx - ri} ${cy}Z`;
 
 const bg = (c) => ({ c, d: rect(0, 0, 100, 100) }); // the background can be colored too
+const union = (...ds) => ds.join(' '); // several shapes as one tappable/colorable region
 
 const sun = [
   bg('blue'),
@@ -140,6 +141,71 @@ const balloons = [
   { c: 'purple', d: ellipse(62, 70, 14, 18) },
 ];
 
+const boat = [
+  bg('blue'),
+  { c: 'blue', d: rect(0, 76, 100, 24) },
+  { c: 'brown', d: poly([18, 76], [82, 76], [70, 90], [30, 90]) },
+  { c: 'brown', d: rect(48, 38, 4, 38) },
+  { c: 'red', d: poly([52, 40], [52, 64], [82, 58]) },
+  { c: 'yellow', d: poly([52, 38], [52, 44], [62, 41]) },
+  { c: 'orange', d: circle(85, 16, 10) },
+];
+
+const icecream = [
+  bg('blue'),
+  { c: 'brown', d: poly([42, 55], [58, 55], [50, 93]) },
+  { c: 'pink', d: circle(50, 50, 17) },
+  { c: 'orange', d: circle(50, 29, 15) },
+  { c: 'white', d: circle(50, 13, 12) },
+  { c: 'red', d: circle(50, 6, 3) },
+];
+
+const bird = [
+  bg('blue'),
+  { c: 'brown', d: rect(0, 82, 100, 7) },
+  { c: 'brown', d: poly([14, 52], [28, 60], [28, 44]) },
+  { c: 'brown', d: ellipse(46, 58, 22, 19) },
+  { c: 'orange', d: ellipse(42, 66, 12, 10) },
+  { c: 'brown', d: circle(72, 44, 14) },
+  { c: 'orange', d: poly([82, 42], [98, 40], [82, 52]) },
+  { c: 'black', d: circle(76, 39, 3) },
+];
+
+const snail = [
+  bg('green'),
+  { c: 'orange', d: circle(55, 45, 20) },
+  { c: 'yellow', d: circle(55, 45, 13) },
+  { c: 'red', d: circle(55, 45, 7) },
+  { c: 'brown', d: ellipse(38, 72, 28, 14) },
+  { c: 'brown', d: circle(70, 68, 9) },
+  { c: 'black', d: union(circle(75, 61, 2.5), circle(78, 64, 2.5)) },
+];
+
+const umbrella = [
+  bg('blue'),
+  { c: 'red', d: 'M12,55 A38,38 0 0 1 50,17 L50,55 Z' },
+  { c: 'yellow', d: 'M50,17 A38,38 0 0 1 88,55 L50,55 Z' },
+  { c: 'brown', d: union(rect(48, 55, 4, 32), poly([46, 87], [46, 94], [36, 94], [36, 90])) },
+];
+
+const turtle = [
+  bg('blue'),
+  {
+    c: 'green',
+    d: union(
+      circle(50, 55, 27),
+      circle(86, 50, 11),
+      ellipse(28, 26, 9, 7),
+      ellipse(72, 26, 9, 7),
+      ellipse(28, 84, 9, 7),
+      ellipse(72, 84, 9, 7),
+      poly([24, 55], [8, 50], [24, 60])
+    ),
+  },
+  { c: 'yellow', d: circle(50, 55, 16) },
+  { c: 'black', d: circle(90, 47, 3) },
+];
+
 export const DRAWINGS = [
   { id: 'sun', names: { en: 'the sun', fr: 'le soleil', de: 'die Sonne' }, regions: sun },
   { id: 'house', names: { en: 'the house', fr: 'la maison', de: 'das Haus' }, regions: house },
@@ -153,4 +219,10 @@ export const DRAWINGS = [
   { id: 'car', names: { en: 'the car', fr: 'la voiture', de: 'das Auto' }, regions: car },
   { id: 'butterfly', names: { en: 'the butterfly', fr: 'le papillon', de: 'der Schmetterling' }, regions: butterfly },
   { id: 'balloons', names: { en: 'the balloons', fr: 'les ballons', de: 'die Luftballons' }, regions: balloons },
+  { id: 'boat', names: { en: 'the boat', fr: 'le bateau', de: 'das Boot' }, regions: boat },
+  { id: 'icecream', names: { en: 'the ice cream', fr: 'la glace', de: 'das Eis' }, regions: icecream },
+  { id: 'bird', names: { en: 'the bird', fr: "l'oiseau", de: 'der Vogel' }, regions: bird },
+  { id: 'snail', names: { en: 'the snail', fr: "l'escargot", de: 'die Schnecke' }, regions: snail },
+  { id: 'umbrella', names: { en: 'the umbrella', fr: 'le parapluie', de: 'der Regenschirm' }, regions: umbrella },
+  { id: 'turtle', names: { en: 'the turtle', fr: 'la tortue', de: 'die Schildkröte' }, regions: turtle },
 ];
