@@ -16,8 +16,9 @@ Built for a 20‑month‑old: giant tap targets, spoken words, cheerful animatio
 | 🙈 **Hide & seek** | An animal peeks out from under a colored cup and is named; the cup drops back over it and the game asks "Where is the dog?". He lifts cups to find it. A wrong cup opens to show nothing and stays open, so there is always a next try. No shuffling (too hard at this age): it plays with *object permanence*, like peekaboo. Uses the "choices per round" setting for 2–4 cups. |
 | 🖍️ **Drawing** | Pick a line drawing (18: sun, house, flower, fish, apple, rainbow, tree, cat, duck, car, butterfly, balloons, boat, ice cream, bird, snail, umbrella, turtle) and scribble with a finger or Apple Pencil. The **color is automatic**: it depends on the region under the pen and changes by itself when crossing into another region, and the color's name is spoken. Paint stays inside the lines, and a region that is about half scribbled fills in completely. Colour everything and the picture wiggles, cheers and flies away — the **next drawing arrives by itself** (its name is spoken), so he can keep going without help. Hold 🗑️ during the celebration to keep the picture instead. Backgrounds can be colored too. Hold the 🗑️ button (bottom right) for a moment to start over (the hold avoids accidents). **Silent mode:** tap the 🔊 button (top right) to mute the drawing mode only: the color name then appears as a colored label on the canvas instead of being spoken. |
 | 🔍 **Find it!** | The game says "Find the dog!" and shows 2–4 pictures. Right answer → confetti. Wrong answer → a gentle wobble and the prompt repeats. |
+| 🎵 **Music** | Two games. *Instruments*: tap a drum, bell, piano, trumpet or guitar to hear its name and a synthesized note — every sound is generated in the browser (no audio files, so nothing to license). *Freeze Dance*: a bear dances to a little tune; the music stops at random and it freezes with a "Freeze!" cue, then dances again — the classic toddler activity for movement and self-regulation. A ⏸️ button pauses it. |
 
-Categories: 🙈 Hide & seek · 🧸 Body · 🖍️ Drawing (own tile on the home screen) · 🎨 Colors · 🐶 Animals · 🍎 Fruits & veggies · 🔢 Numbers & shapes
+Categories: 🙈 Hide & seek · 🧸 Body · 🎵 Music · 🖍️ Drawing (own tile on the home screen) · 🎨 Colors · 🐶 Animals · 🍎 Fruits & veggies · 🔢 Numbers & shapes
 
 ### Toddler-proof touch handling
 Little hands press hard, hold, slide and rest a palm on the screen, so the game reacts the moment a finger **touches** a picture (no clean "tap" needed) and blocks pinch-zoom, double-tap zoom, text selection and long-press menus (also on iPad, where Safari ignores \`user-scalable=no\`). Scrolling with one finger still works.
@@ -99,11 +100,13 @@ index.html          entry point
 css/style.css       styles
 js/data.js          all words (en / fr / de) and languages
 js/i18n.js          UI strings + saved settings
-js/speech.js        text-to-speech / custom audio
+js/speech.js        text-to-speech / recordings / synthesized tones (Web Audio)
 js/ui.js            DOM helpers, confetti, hold-to-open button
-js/games/           Explore, Find-it, Sounds and Drawing (paint.js) modes
+js/playtime.js      play-time counter and daily limit
+js/games/           Explore, Find-it, Sounds, Body, Hide & seek, Music, Drawing
 js/drawings.js      the line drawings to colour
 js/bodyparts.js     the bear and its body parts (names in en/fr/de)
+js/instruments.js   instrument names + synthesized-tone settings
 sw.js, manifest…    offline / installable app
 ```
 

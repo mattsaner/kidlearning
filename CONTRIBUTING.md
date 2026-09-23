@@ -36,3 +36,6 @@ The bear is defined in `js/bodyparts.js`: `BODY_PARTS` holds the names (en/fr/de
 
 ## Hide & seek
 `js/games/hide.js` hides a random animal from the *Animals* category (`js/data.js`) under 2–4 cups; add animals there and they join the game. The number of cups comes from the "choices per round" setting.
+
+## Music mode
+`js/instruments.js` holds `INSTRUMENTS` (id, emoji, names in en/fr/de, and a `tone` describing the synthesized sound: waveform, frequency, duration, attack, gain, an optional `harmonic` overtone) and `DANCE_NOTES` (the Freeze Dance melody). All sounds are generated with Web Audio oscillators in `js/games/music.js` — there are no audio files to license here. Add an instrument by adding an entry to `INSTRUMENTS`; it appears automatically in the Instruments screen.

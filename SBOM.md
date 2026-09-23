@@ -6,7 +6,7 @@ Its only third-party *content* is 12 animal sound recordings (below). This docum
 Machine-readable [CycloneDX 1.5](https://cyclonedx.org/) version: [`sbom.cdx.json`](sbom.cdx.json) (includes SHA-256 checksums and license links).
 There is no video in the project.
 
-_Last reviewed: 2026-09-23 · Version: 1.5.0_
+_Last reviewed: 2026-09-23 · Version: 1.6.0_
 
 ## 1. Application and first-party content
 
@@ -15,6 +15,7 @@ _Last reviewed: 2026-09-23 · Version: 1.5.0_
 | kidlearning code (HTML / CSS / JavaScript ES modules, no build step) | [MIT](LICENSE) | © 2026 Matthieu Saner |
 | Word lists, translations (EN / FR / DE), the line drawings and the body-parts bear (`js/data.js`, `js/drawings.js`, `js/bodyparts.js`) | MIT | Written for this project |
 | App icons (`assets/icons/icon.svg` and the PNGs rendered from it) | MIT | Own vector artwork (a bear drawn with shapes); no emoji glyphs or third-party images |
+| Music mode sounds (`js/instruments.js`, `js/games/music.js`) | MIT | Every instrument note and the Freeze Dance tune are **generated at runtime with Web Audio oscillators** (no audio files, no recordings); the tune is an original simple pentatonic pattern, not based on any existing song |
 
 ## 2. Third-party media: animal sounds (`assets/audio/cries/*.mp3`)
 
@@ -61,7 +62,7 @@ The MIT license of the code does **not** cover these recordings; they keep the l
 
 ## 4. Browser platform APIs used
 
-Web Speech API (`speechSynthesis`), Web Audio API (animal recordings), `localStorage` (settings, play time), Service Worker + Web App Manifest (offline, "Add to Home Screen"), Pointer Events, Canvas 2D, `<dialog>`, CSS Grid, ES modules.
+Web Speech API (`speechSynthesis`), Web Audio API (animal recordings, and generated tones in Music mode), `localStorage` (settings, play time), Service Worker + Web App Manifest (offline, "Add to Home Screen"), Pointer Events, Canvas 2D, `<dialog>`, CSS Grid, ES modules.
 
 ## 5. Build and deploy tooling (not shipped)
 

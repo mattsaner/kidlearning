@@ -21,6 +21,7 @@ let utterance = null; // keep the utterance referenced (some browsers drop it ot
 let token = 0;
 let pending = null; // latest request: { kind, run, time, served, sample }
 let ttsUnlocked = !synth;
+let readyQueue = []; // fn(ctx) callbacks waiting for the AudioContext to unlock (see whenAudioReady)
 
 let custom = {}; // { fr: ['dog', ...] }: recorded voice files, see assets/audio/manifest.json
 fetch('assets/audio/manifest.json').then((r) => (r.ok ? r.json() : {})).then((m) => { custom = m; }).catch(() => {});
@@ -132,6 +133,19 @@ export function playCry(id) {
 
 export const preloadCries = (ids) => preload(ids.map((id) => `assets/audio/cries/${id}.mp3`));
 
+/**
+ * Run `fn(ctx)` on the shared AudioContext: now if it is already unlocked (e.g. a
+ * later screen, after the first tap of the session), otherwise as soon as a touch
+ * gesture unlocks it. Used for synthesized sound (see js/games/music.js) so it
+ * doesn't need to solve the iOS "first tap" problem a second time.
+ */
+export function whenAudioReady(fn) {
+  const c = audioCtx();
+  if (!c) return;
+  if (c.state === 'running') fn(c);
+  else readyQueue.push(fn);
+}
+
 // --- unlock on touch gestures
 
 const GESTURES = ['pointerup', 'touchend', 'click', 'keydown'];
@@ -148,6 +162,7 @@ function unlock() {
   if (c && c.state !== 'running') {
     const go = () => {
       if (pending?.sample && !pending.served && c.state === 'running') pending.sample();
+      if (c.state === 'running') readyQueue.splice(0).forEach((fn) => fn(c));
       finish();
     };
     c.resume().then(go, go);

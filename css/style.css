@@ -74,6 +74,25 @@ button { font: inherit; color: inherit; cursor: pointer; }
 .hide-row + .word + .replay { margin-top: 4px; }
 @media (max-height: 520px) { .hide-row { margin-top: 48px; } .hide-row + .word { margin-top: 4px; } .slot { width: min(22vw, 30vh, 200px); } }
 
+/* Music mode */
+.dance-fig {
+  font-size: clamp(120px, 32vmin, 260px); line-height: 1; text-align: center; margin-top: 40px;
+  transform-origin: center bottom;
+}
+.dance-fig.dancing { animation: dance 0.6s ease-in-out infinite; }
+.dance-fig.frozen { filter: saturate(0.6) brightness(1.08); }
+@keyframes dance {
+  0%, 100% { transform: translateX(0) rotate(-6deg) scale(1); }
+  25% { transform: translateX(-16px) rotate(4deg) scale(1.05); }
+  50% { transform: translateX(0) rotate(-2deg) scale(0.97); }
+  75% { transform: translateX(16px) rotate(6deg) scale(1.05); }
+}
+.dance-caption { margin-top: 20px; }
+@media (max-height: 520px) {
+  .dance-fig { font-size: clamp(80px, 40vh, 220px); margin-top: 12px; }
+  .dance-caption { margin-top: 8px; }
+}
+
 /* Body mode */
 .body-fig {
   width: min(92vw, calc(100dvh - 210px), 720px); height: auto; aspect-ratio: 1; background: #dff2ff;
@@ -253,7 +272,7 @@ button { font: inherit; color: inherit; cursor: pointer; }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .bounce, .pop, .wobble, .confetti span, .cry-badge, .body-fig .part { animation-duration: 0.01s; }
+  .bounce, .pop, .wobble, .confetti span, .cry-badge, .body-fig .part, .dance-fig.dancing { animation-duration: 0.01s; }
   .cover { transition-duration: 0.01s; }
   .paint-wrap.celebrate, .paint-wrap.leave, .paint-wrap.enter { animation-duration: 0.01s; }
 }

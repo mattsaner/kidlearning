@@ -10,6 +10,7 @@ import { startPaint, thumbnail } from './games/paint.js';
 import { DRAWINGS } from './drawings.js';
 import { startBody } from './games/body.js';
 import { startHide } from './games/hide.js';
+import { startInstruments, startFreezeDance } from './games/music.js';
 import { playtime, startPlaytime, fmt } from './playtime.js';
 
 const app = document.getElementById('app');
@@ -43,6 +44,8 @@ function home() {
         el('span', { class: 'tile-icon' }, '🧸'), el('span', { class: 'tile-label' }, t().body)),
       el('button', { class: 'tile', type: 'button', onpress: () => { speak(t().hide); show((s2) => startHide(s2), { back: home }); } },
         el('span', { class: 'tile-icon' }, '🙈'), el('span', { class: 'tile-label' }, t().hide)),
+      el('button', { class: 'tile', type: 'button', onpress: () => { speak(t().music); musicScreen(); } },
+        el('span', { class: 'tile-icon' }, '🎵'), el('span', { class: 'tile-label' }, t().music)),
       el('button', { class: 'tile', type: 'button', onpress: () => { speak(t().draw); drawingChooser(); } },
         el('span', { class: 'tile-icon' }, '🖍️'), el('span', { class: 'tile-label' }, t().draw))
     );
@@ -83,6 +86,17 @@ function bodyScreen() {
 
 function bodyGame(mode) {
   show((s) => startBody(s, mode), { back: bodyScreen });
+}
+
+function musicScreen() {
+  show((s) => {
+    const grid = el('div', { class: 'menu' });
+    for (const m of [{ icon: '🥁', label: t().instruments, run: startInstruments }, { icon: '💃', label: t().freezeDance, run: startFreezeDance }]) {
+      grid.append(el('button', { class: 'tile', type: 'button', onpress: () => show((s2) => m.run(s2), { back: musicScreen }) },
+        el('span', { class: 'tile-icon' }, m.icon), el('span', { class: 'tile-label' }, m.label)));
+    }
+    s.append(grid);
+  }, { back: home });
 }
 
 function drawingChooser() {
