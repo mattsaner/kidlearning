@@ -61,8 +61,17 @@ export function thumbnail(drawing) {
   return c;
 }
 
-export function startPaint(root, drawing) {
+/**
+ * @param {object} opts
+ *   `onFinish`  called when every region is coloured, after the celebration
+ *               (the caller shows the next drawing);
+ *   `entering`  true when this drawing follows a finished one (it flies in
+ *               and its name is spoken).
+ */
+export function startPaint(root, drawing, opts = {}) {
   const regions = prepare(drawing);
+  const timers = [];
+  const later = (fn, ms) => timers.push(setTimeout(fn, ms));
 
   // --- hidden map: which region is at a point (region index + 1, 0 = none)
   // Ids are spread over the 0-255 range (not 1, 2, 3...) so that any rounding or
@@ -169,6 +178,8 @@ export function startPaint(root, drawing) {
   }
 
   function clearAll() {
+    timers.splice(0).forEach(clearTimeout);
+    wrap.classList.remove('celebrate', 'leave');
     ops = [];
     painted = regions.map(() => new Set());
     done = regions.map(() => false);
@@ -188,11 +199,25 @@ export function startPaint(root, drawing) {
     draw(op);
     if (done.every(Boolean) && !finished) {
       finished = true;
+      activeId = null;
       confetti(toScreen(50, 50), 40);
       if (loud()) speak(pick(t().yes));
+      celebrate();
     } else {
       confetti(toScreen(x, y), 8);
     }
+  }
+
+  /** The finished picture wiggles proudly, then flies out and the next one arrives. */
+  function celebrate() {
+    replayAnimation(wrap, 'celebrate');
+    later(() => confetti(toScreen(50, 50), 20), 650);
+    if (!opts.onFinish) return;
+    later(() => {
+      wrap.classList.remove('celebrate');
+      wrap.classList.add('leave');
+    }, 1500);
+    later(() => opts.onFinish(), 2000);
   }
 
   function markCells(ri, x, y) {
@@ -256,6 +281,7 @@ export function startPaint(root, drawing) {
   };
 
   wrap.addEventListener('pointerdown', (e) => {
+    if (finished) return; // celebrating: the next drawing is on its way
     if (e.pointerType === 'pen') penSeen = true;
     if (activeId !== null || (e.pointerType === 'touch' && penSeen)) return; // one pointer; palm rejection with a pencil
     activeId = e.pointerId;
@@ -278,6 +304,14 @@ export function startPaint(root, drawing) {
   wrap.addEventListener('pointercancel', end);
 
   layout();
+  if (opts.entering) {
+    wrap.classList.add('enter');
+    if (loud()) speak(drawing.names[settings.lang]);
+  }
   window.addEventListener('resize', layout);
-  return () => { window.removeEventListener('resize', layout); clearTimeout(captionTimer); };
+  return () => {
+    timers.forEach(clearTimeout);
+    window.removeEventListener('resize', layout);
+    clearTimeout(captionTimer);
+  };
 }

@@ -98,8 +98,22 @@ function drawingChooser() {
   }, { back: home });
 }
 
-function paintScreen(drawing) {
-  show((s) => startPaint(s, drawing), { back: drawingChooser });
+// Next drawing after a finished one: a shuffled bag, so every drawing comes up
+// before any of them repeats (and never the same one twice in a row).
+let drawingBag = [];
+function nextDrawing(current) {
+  drawingBag = drawingBag.filter((d) => d.id !== current.id);
+  if (!drawingBag.length) {
+    drawingBag = DRAWINGS.filter((d) => d.id !== current.id).sort(() => Math.random() - 0.5);
+  }
+  return drawingBag.pop();
+}
+
+function paintScreen(drawing, entering = false) {
+  show((s) => startPaint(s, drawing, {
+    entering,
+    onFinish: () => paintScreen(nextDrawing(drawing), true),
+  }), { back: drawingChooser });
 }
 
 function gameScreen(cat, run) {
