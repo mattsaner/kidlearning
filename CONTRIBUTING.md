@@ -39,3 +39,6 @@ The bear is defined in `js/bodyparts.js`: `BODY_PARTS` holds the names (en/fr/de
 
 ## Music mode
 `js/instruments.js` holds `INSTRUMENTS` (id, emoji, names in en/fr/de, and a `tone` describing the synthesized sound: waveform, frequency, duration, attack, gain, an optional `harmonic` overtone) and `DANCE_NOTES` (the Freeze Dance melody). All sounds are generated with Web Audio oscillators in `js/games/music.js` — there are no audio files to license here. Add an instrument by adding an entry to `INSTRUMENTS`; it appears automatically in the Instruments screen.
+
+## Statistics
+`js/stats.js` is a parent-only, self-contained module (like `js/playtime.js`): `stats.playMode(key)` counts a navigation into a mode (called from `js/main.js`, at the menu tap, not on auto-advance), `stats.seeWord/seeSound/seeInstrument/seeBodyPart/finishDrawing(id)` record a discovery (deduplicated automatically), and `stats.recordQuiz(kind, firstTryCorrect)` records one round of a "find it" style game — call it once, when the round resolves correctly, with whether any wrong tap happened first. Add a new discovery/quiz hook the same way: call the relevant `stats.*` function at the point in the game module where the event actually happens, and add a matching row in `statsView()` in `js/main.js` (a `discoveryRow(...)` or `quizRow(...)` call) so it shows up in Settings → 📊 Statistics.

@@ -6,7 +6,7 @@ Its only third-party *content* is 12 animal sound recordings (below). This docum
 Machine-readable [CycloneDX 1.5](https://cyclonedx.org/) version: [`sbom.cdx.json`](sbom.cdx.json) (includes SHA-256 checksums and license links).
 There is no video in the project.
 
-_Last reviewed: 2026-09-23 · Version: 1.6.0_
+_Last reviewed: 2026-09-25 · Version: 1.7.0_
 
 ## 1. Application and first-party content
 
@@ -16,6 +16,7 @@ _Last reviewed: 2026-09-23 · Version: 1.6.0_
 | Word lists, translations (EN / FR / DE), the line drawings and the body-parts bear (`js/data.js`, `js/drawings.js`, `js/bodyparts.js`) | MIT | Written for this project |
 | App icons (`assets/icons/icon.svg` and the PNGs rendered from it) | MIT | Own vector artwork (a bear drawn with shapes); no emoji glyphs or third-party images |
 | Music mode sounds (`js/instruments.js`, `js/games/music.js`) | MIT | Every instrument note and the Freeze Dance tune are **generated at runtime with Web Audio oscillators** (no audio files, no recordings); the tune is an original simple pentatonic pattern, not based on any existing song |
+| Statistics (`js/stats.js`) | MIT | Parent-only play-time, discovery and accuracy tracking; stored only in the browser's local storage, never sent anywhere, no third-party analytics |
 
 ## 2. Third-party media: animal sounds (`assets/audio/cries/*.mp3`)
 
@@ -62,7 +63,7 @@ The MIT license of the code does **not** cover these recordings; they keep the l
 
 ## 4. Browser platform APIs used
 
-Web Speech API (`speechSynthesis`), Web Audio API (animal recordings, and generated tones in Music mode), `localStorage` (settings, play time), Service Worker + Web App Manifest (offline, "Add to Home Screen"), Pointer Events, Canvas 2D, `<dialog>`, CSS Grid, ES modules.
+Web Speech API (`speechSynthesis`), Web Audio API (animal recordings, and generated tones in Music mode), `localStorage` (settings, play time, statistics), Service Worker + Web App Manifest (offline, "Add to Home Screen"), Pointer Events, Canvas 2D, `<dialog>`, CSS Grid, ES modules.
 
 ## 5. Build and deploy tooling (not shipped)
 
@@ -78,7 +79,7 @@ Actions are pinned to major-version tags; pin to commit SHAs for stricter supply
 
 ## 6. Privacy
 
-The game collects **no personal data**, has no accounts, no analytics, no ads and makes no network requests to third parties. Settings and play time are stored only in the browser's `localStorage` on the device. Nothing leaves the device.
+The game collects **no personal data**, has no accounts, no analytics, no ads and makes no network requests to third parties. Settings, play time and the parent-only statistics (discovery, accuracy) are stored only in the browser's `localStorage` on the device. Nothing leaves the device.
 
 ## 7. Keeping this file current
 

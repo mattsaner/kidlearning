@@ -10,6 +10,10 @@ const STRINGS = {
     sound: 'Sound', drawSound: 'Drawing sound', back: 'Back', holdHint: 'Hold to open (parents)', category: 'Category',
     find: (w) => `Find ${w}!`, yes: ['Yes!', 'Well done!', 'Bravo!', 'Great!'],
     close: 'Close', mode: 'Game', choices: 'Choices per round',
+    statsTitle: 'Statistics', thisWeek: 'This week', allTime: 'All time', gamesPlayed: 'Games played',
+    discovery: 'Discovery', words: 'Words', drawingsLabel: 'Drawings', soundsLabel: 'Animal sounds',
+    accuracy: 'Accuracy', firstTry: 'first try', rounds: 'rounds', last: (n) => `last ${n}`,
+    resetStats: 'Reset statistics', noRounds: 'No rounds played yet',
   },
   fr: {
     kidLockTip: "Astuce : pour garder votre enfant dans le jeu, ajoutez-le à l'écran d'accueil (Partager → Sur l'écran d'accueil), puis activez l'Accès guidé (Réglages → Accessibilité).",
@@ -20,6 +24,10 @@ const STRINGS = {
     sound: 'Son', drawSound: 'Son du dessin', back: 'Retour', holdHint: 'Maintenir pour ouvrir (parents)', category: 'Catégorie',
     find: (w) => `Trouve ${w} !`, yes: ['Oui !', 'Bravo !', 'Super !', 'Bien joué !'],
     close: 'Fermer', mode: 'Jeu', choices: 'Choix par tour',
+    statsTitle: 'Statistiques', thisWeek: 'Cette semaine', allTime: 'Depuis toujours', gamesPlayed: 'Parties jouées',
+    discovery: 'Découverte', words: 'Mots', drawingsLabel: 'Dessins', soundsLabel: "Cris d'animaux",
+    accuracy: 'Précision', firstTry: 'du premier coup', rounds: 'tours', last: (n) => `${n} derniers`,
+    resetStats: 'Réinitialiser les statistiques', noRounds: 'Pas encore de tour joué',
   },
   de: {
     kidLockTip: 'Tipp: Damit Ihr Kind im Spiel bleibt, zum Home-Bildschirm hinzufügen (Teilen → Zum Home-Bildschirm) und dann den Geführten Zugriff aktivieren (Einstellungen → Bedienungshilfen).',
@@ -30,6 +38,10 @@ const STRINGS = {
     sound: 'Ton', drawSound: 'Ton beim Malen', back: 'Zurück', holdHint: 'Gedrückt halten (Eltern)', category: 'Kategorie',
     find: (w) => `Finde ${w}!`, yes: ['Ja!', 'Bravo!', 'Super!', 'Toll gemacht!'],
     close: 'Schließen', mode: 'Spiel', choices: 'Auswahl pro Runde',
+    statsTitle: 'Statistik', thisWeek: 'Diese Woche', allTime: 'Insgesamt', gamesPlayed: 'Gespielte Spiele',
+    discovery: 'Entdeckung', words: 'Wörter', drawingsLabel: 'Zeichnungen', soundsLabel: 'Tiergeräusche',
+    accuracy: 'Genauigkeit', firstTry: 'beim ersten Versuch', rounds: 'Runden', last: (n) => `letzte ${n}`,
+    resetStats: 'Statistik zurücksetzen', noRounds: 'Noch keine Runde gespielt',
   },
 };
 

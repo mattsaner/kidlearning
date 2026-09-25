@@ -2,6 +2,7 @@ import { el, onPress, replayAnimation, confetti } from '../ui.js';
 import { speak } from '../speech.js';
 import { settings, t, pick } from '../i18n.js';
 import { BODY_REGIONS, BODY_DECOR, BODY_PARTS, FIND_POOL } from '../bodyparts.js';
+import { stats } from '../stats.js';
 
 // Body mode: a big bear whose parts can be touched.
 //  - "explore": touch a part, hear and read its name.
@@ -53,6 +54,7 @@ export function startBody(root, mode) {
         pop(path);
         replayAnimation(word, 'pop');
         speak(name(part), `body-${part}`);
+        stats.seeBodyPart(part);
       });
     }
     root.append(word, figure);
@@ -64,6 +66,7 @@ export function startBody(root, mode) {
   let target = null;
   let misses = 0;
   let locked = false;
+  let firstTry = true;
   const replay = el('button', { class: 'replay', type: 'button', 'aria-label': 'Replay' }, '🔊');
   const promptSpeech = () => speak(t().whereIs(name(target)));
   onPress(replay, () => target && promptSpeech());
@@ -72,6 +75,7 @@ export function startBody(root, mode) {
     for (const p of parts) p.classList.remove('hint');
     locked = false;
     misses = 0;
+    firstTry = true;
     target = pick(FIND_POOL.filter((p) => p !== last));
     last = target;
     // sound off: show the question as text so the game stays playable
@@ -88,9 +92,11 @@ export function startBody(root, mode) {
         for (const p of nodes.get(part)) { p.classList.remove('hint'); pop(p); }
         confetti(path, 14);
         speak(`${pick(t().yes)} ${name(part)}`);
+        stats.recordQuiz('bodyFind', firstTry);
         later(round, 2400);
       } else {
         pop(path, 'wobble');
+        firstTry = false;
         misses++;
         speak(name(part)); // "that's the hand": a free lesson, then the question again
         if (misses >= 2) for (const p of nodes.get(target)) p.classList.add('hint');

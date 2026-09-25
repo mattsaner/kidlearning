@@ -1,6 +1,7 @@
 import { el, card, replayAnimation } from '../ui.js';
 import { speak } from '../speech.js';
 import { settings } from '../i18n.js';
+import { stats } from '../stats.js';
 
 /**
  * Tap a picture to hear its name. For items with a `cry` (animals) the first
@@ -37,6 +38,7 @@ export function startExplore(root, category) {
       const name = item.names[settings.lang];
       word.textContent = name;
       speak(name, item.id);
+      stats.seeWord(category.id, item.id);
       if (item.cry) {
         armed = c;
         c.classList.add('armed');

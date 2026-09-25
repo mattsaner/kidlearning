@@ -1,6 +1,7 @@
 import { el, card, replayAnimation, confetti, onPress } from '../ui.js';
 import { speak } from '../speech.js';
 import { settings, t, pick } from '../i18n.js';
+import { stats } from '../stats.js';
 
 const shuffle = (a) => a.map((v) => [Math.random(), v]).sort((x, y) => x[0] - y[0]).map((p) => p[1]);
 
@@ -26,6 +27,7 @@ export function startFindIt(root, category) {
     promptText.textContent = settings.sound ? '\u00a0' : t().find(target.names[settings.lang]);
 
     let locked = false;
+    let firstTry = true;
     board.replaceChildren(
       ...shuffle([target, ...others]).map((item) => {
         const c = card(item, () => {
@@ -35,8 +37,10 @@ export function startFindIt(root, category) {
             replayAnimation(c, 'bounce');
             confetti(c);
             speak(`${pick(t().yes)} ${target.names[settings.lang]}`);
+            stats.recordQuiz('findit', firstTry);
             timer = setTimeout(round, 2200);
           } else {
+            firstTry = false;
             replayAnimation(c, 'wobble');
             timer = setTimeout(prompt, 600);
           }

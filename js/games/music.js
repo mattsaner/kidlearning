@@ -2,6 +2,7 @@ import { el, card, onPress, replayAnimation } from '../ui.js';
 import { speak, whenAudioReady } from '../speech.js';
 import { settings, t } from '../i18n.js';
 import { INSTRUMENTS, DANCE_NOTES } from '../instruments.js';
+import { stats } from '../stats.js';
 
 // Music mode: two small games built on synthesized tones (Web Audio oscillators,
 // nothing to download or license). "Instruments" is cause-and-effect: tap, hear,
@@ -41,6 +42,7 @@ export function startInstruments(root) {
       replayAnimation(word, 'pop');
       playIfLoud(inst.tone);
       speak(inst.names[settings.lang], `inst-${inst.id}`);
+      stats.seeInstrument(inst.id);
     });
     grid.append(c);
   }

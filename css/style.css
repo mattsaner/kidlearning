@@ -170,6 +170,20 @@ button { font: inherit; color: inherit; cursor: pointer; }
 .credits-list a { color: #0b5cad; }
 .settings .stats { margin: 10px 2px 8px; font-variant-numeric: tabular-nums; opacity: 0.8; }
 
+/* Parent-only stats view (inside the settings dialog) */
+.stats-view { max-height: 60vh; overflow: auto; margin: 8px 0; -webkit-user-select: text; user-select: text; }
+.mode-list, .quiz-list { font-size: 14px; line-height: 1.6; }
+.mode-row { display: inline; }
+.mode-row::after { content: ' · '; opacity: 0.5; }
+.mode-row:last-child::after { content: ''; }
+.quiz-row { margin: 4px 0; font-size: 14px; }
+.discovery-list { display: flex; flex-direction: column; gap: 8px; }
+.discovery-row { display: flex; align-items: center; gap: 8px; font-size: 14px; }
+.discovery-label { flex: 0 0 auto; min-width: 108px; }
+.discovery-bar { flex: 1 1 auto; height: 10px; background: rgba(61, 44, 30, 0.12); border-radius: 6px; overflow: hidden; }
+.discovery-fill { height: 100%; background: var(--accent); border-radius: 6px; transition: width 0.3s ease; }
+.discovery-num { flex: 0 0 auto; min-width: 40px; text-align: right; font-variant-numeric: tabular-nums; font-size: 13px; opacity: 0.75; }
+
 /* Cards */
 .grid {
   display: grid; gap: 14px; width: min(1000px, 100%);

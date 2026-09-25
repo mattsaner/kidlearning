@@ -2,6 +2,7 @@ import { el, holdButton, onPress, confetti, replayAnimation } from '../ui.js';
 import { speak } from '../speech.js';
 import { settings, saveSettings, t, pick } from '../i18n.js';
 import { CATEGORIES } from '../data.js';
+import { stats } from '../stats.js';
 
 // Colouring mode. The child scribbles anywhere; the colour is chosen by the
 // region under the pen (so it changes by itself when crossing regions), paint
@@ -200,6 +201,7 @@ export function startPaint(root, drawing, opts = {}) {
     if (done.every(Boolean) && !finished) {
       finished = true;
       activeId = null;
+      stats.finishDrawing(drawing.id);
       confetti(toScreen(50, 50), 40);
       if (loud()) speak(pick(t().yes));
       celebrate();

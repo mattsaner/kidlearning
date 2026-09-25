@@ -44,7 +44,7 @@ export const playtime = {
   reset() { state = { day: dayKey(), seconds: 0, extra: 0 }; session = 0; save(); },
 };
 
-/** Start counting. `onTick` runs every second (update the display, check the limit). */
+/** Start counting. `onTick(active)` runs every second (update the display, check the limit). */
 export function startPlaytime(onTick) {
   const touch = () => { lastActivity = Date.now(); };
   for (const ev of ['pointerdown', 'pointermove', 'keydown', 'touchstart']) {
@@ -58,7 +58,7 @@ export function startPlaytime(onTick) {
       session++;
       if (state.seconds % 5 === 0) save();
     }
-    onTick();
+    onTick(active);
   }, 1000);
   window.addEventListener('pagehide', save);
   document.addEventListener('visibilitychange', () => { if (document.visibilityState === 'hidden') save(); });

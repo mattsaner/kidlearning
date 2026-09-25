@@ -36,6 +36,17 @@ A faint counter (⏱ 12:30) at the bottom of every screen shows how long your ch
 
 If you set a **daily limit** in the settings, the counter shows `12:30 / 20:00` and turns red for the last two minutes. When the time is up, a friendly "See you tomorrow 🌙" screen covers the game (and says it out loud). A parent can press and hold the 🔓 button for 2 seconds to grant 5 more minutes.
 
+### Statistics (parent-only)
+
+Settings → **📊 Statistics** shows how the game is being used. Nothing here is ever shown to the child, and none of it changes how the game plays — it's purely informational for you.
+
+- **Play time:** today, this week and all-time totals.
+- **Games played:** how many times each mode was opened (Explore, Find it!, Sounds, Body, Hide & seek, Music, Drawing).
+- **Discovery:** what's been explored at least once — words per category, drawings finished, animal sounds heard, instruments played, body parts touched — each shown as a `12/47`-style count with a bar. Nothing here is "right or wrong": tapping something once is enough.
+- **Accuracy:** for *Find it!*, *Body → Find it* and *Hide & seek*, the share of rounds solved without a wrong tap first, plus a "last 20 rounds" rate once there's enough data to show a trend. A wrong tap during play never has a consequence for the child (see the modes above) — this is purely a private, parent-facing read of how it's going.
+
+A **↺ Reset statistics** button clears all of this (separate from the play-time counter's own reset). Everything is stored only in the browser's local storage on that device.
+
 ### For parents: the settings page
 
 The settings are hidden behind a **press-and-hold** button so a toddler can't open them by accident.
@@ -103,6 +114,7 @@ js/i18n.js          UI strings + saved settings
 js/speech.js        text-to-speech / recordings / synthesized tones (Web Audio)
 js/ui.js            DOM helpers, confetti, hold-to-open button
 js/playtime.js      play-time counter and daily limit
+js/stats.js         parent-only stats: time, games played, discovery, accuracy
 js/games/           Explore, Find-it, Sounds, Body, Hide & seek, Music, Drawing
 js/drawings.js      the line drawings to colour
 js/bodyparts.js     the bear and its body parts (names in en/fr/de)

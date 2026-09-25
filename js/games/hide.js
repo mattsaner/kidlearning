@@ -2,6 +2,7 @@ import { el, onPress, replayAnimation, confetti } from '../ui.js';
 import { speak } from '../speech.js';
 import { settings, t, pick } from '../i18n.js';
 import { CATEGORIES } from '../data.js';
+import { stats } from '../stats.js';
 
 // Hide and find (peekaboo / shell game, no shuffling). An animal peeks out from under
 // a cup, the cup drops back over it, and the child lifts cups to find it. A wrong cup
@@ -27,6 +28,7 @@ export function startHide(root) {
   let animal = null;
   let last = null;
   let locked = true;
+  let firstTry = true;
 
   const name = () => animal.names[settings.lang];
   const ask = () => {
@@ -57,6 +59,7 @@ export function startHide(root) {
     target = Math.floor(Math.random() * slots.length);
     slots[target].critter.textContent = animal.emoji;
     locked = true;
+    firstTry = true;
     word.textContent = NBSP;
 
     later(() => { // 1. the animal peeks out and is named
@@ -83,8 +86,10 @@ export function startHide(root) {
       word.textContent = name();
       confetti(slots[i].critter, 16);
       speak(`${pick(t().yes)} ${name()}`);
+      stats.recordQuiz('hide', firstTry);
       later(round, 3000);
     } else {
+      firstTry = false;
       replayAnimation(slots[i].cover, 'wobble');
       word.textContent = t().notHere;
       speak(t().notHere);

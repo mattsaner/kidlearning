@@ -1,6 +1,7 @@
 import { el, card, replayAnimation } from '../ui.js';
 import { playCry, preloadCries } from '../speech.js';
 import { settings } from '../i18n.js';
+import { stats } from '../stats.js';
 
 /** Third mode: tap an animal to hear a real recording of its sound. */
 export function startSounds(root, category) {
@@ -15,6 +16,7 @@ export function startSounds(root, category) {
       replayAnimation(c, 'bounce');
       replayAnimation(word, 'pop');
       playCry(item.id);
+      stats.seeSound(item.id);
     });
     grid.append(c);
   }

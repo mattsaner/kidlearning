@@ -12,6 +12,9 @@ import { startBody } from './games/body.js';
 import { startHide } from './games/hide.js';
 import { startInstruments, startFreezeDance } from './games/music.js';
 import { playtime, startPlaytime, fmt } from './playtime.js';
+import { stats } from './stats.js';
+import { BODY_PARTS } from './bodyparts.js';
+import { INSTRUMENTS } from './instruments.js';
 
 const app = document.getElementById('app');
 let cleanup = null;
@@ -42,11 +45,11 @@ function home() {
     grid.append(
       el('button', { class: 'tile', type: 'button', onpress: () => { speak(t().body); bodyScreen(); } },
         el('span', { class: 'tile-icon' }, '🧸'), el('span', { class: 'tile-label' }, t().body)),
-      el('button', { class: 'tile', type: 'button', onpress: () => { speak(t().hide); show((s2) => startHide(s2), { back: home }); } },
+      el('button', { class: 'tile', type: 'button', onpress: () => { speak(t().hide); stats.playMode('hide'); show((s2) => startHide(s2), { back: home }); } },
         el('span', { class: 'tile-icon' }, '🙈'), el('span', { class: 'tile-label' }, t().hide)),
       el('button', { class: 'tile', type: 'button', onpress: () => { speak(t().music); musicScreen(); } },
         el('span', { class: 'tile-icon' }, '🎵'), el('span', { class: 'tile-label' }, t().music)),
-      el('button', { class: 'tile', type: 'button', onpress: () => { speak(t().draw); drawingChooser(); } },
+      el('button', { class: 'tile', type: 'button', onpress: () => { speak(t().draw); stats.playMode('drawing'); drawingChooser(); } },
         el('span', { class: 'tile-icon' }, '🖍️'), el('span', { class: 'tile-label' }, t().draw))
     );
     s.append(grid, holdButton('⚙️', 1500, openSettings, t().holdHint),
@@ -57,15 +60,15 @@ function home() {
 function categoryScreen(cat) {
   show((s) => {
     const modes = [
-      { icon: '👆', label: t().explore, run: startExplore },
-      { icon: '🔍', label: t().findit, run: startFindIt },
+      { icon: '👆', label: t().explore, run: startExplore, key: 'explore' },
+      { icon: '🔍', label: t().findit, run: startFindIt, key: 'findit' },
       // Real animal recordings: only for categories that have them
-      ...(cat.items.some((i) => i.cry) ? [{ icon: '🔊', label: t().sounds, run: startSounds }] : []),
+      ...(cat.items.some((i) => i.cry) ? [{ icon: '🔊', label: t().sounds, run: startSounds, key: 'sounds' }] : []),
     ];
     const grid = el('div', { class: 'menu' });
     for (const m of modes) {
       grid.append(
-        el('button', { class: 'tile', type: 'button', onpress: () => gameScreen(cat, m.run) },
+        el('button', { class: 'tile', type: 'button', onpress: () => { stats.playMode(m.key); gameScreen(cat, m.run); } },
           el('span', { class: 'tile-icon' }, m.icon), el('span', { class: 'tile-label' }, m.label))
       );
     }
@@ -76,8 +79,8 @@ function categoryScreen(cat) {
 function bodyScreen() {
   show((s) => {
     const grid = el('div', { class: 'menu' });
-    for (const m of [{ icon: '👆', label: t().explore, mode: 'explore' }, { icon: '🔍', label: t().findit, mode: 'find' }]) {
-      grid.append(el('button', { class: 'tile', type: 'button', onpress: () => bodyGame(m.mode) },
+    for (const m of [{ icon: '👆', label: t().explore, mode: 'explore', key: 'bodyExplore' }, { icon: '🔍', label: t().findit, mode: 'find', key: 'bodyFind' }]) {
+      grid.append(el('button', { class: 'tile', type: 'button', onpress: () => { stats.playMode(m.key); bodyGame(m.mode); } },
         el('span', { class: 'tile-icon' }, m.icon), el('span', { class: 'tile-label' }, m.label)));
     }
     s.append(grid);
@@ -91,8 +94,8 @@ function bodyGame(mode) {
 function musicScreen() {
   show((s) => {
     const grid = el('div', { class: 'menu' });
-    for (const m of [{ icon: '🥁', label: t().instruments, run: startInstruments }, { icon: '💃', label: t().freezeDance, run: startFreezeDance }]) {
-      grid.append(el('button', { class: 'tile', type: 'button', onpress: () => show((s2) => m.run(s2), { back: musicScreen }) },
+    for (const m of [{ icon: '🥁', label: t().instruments, run: startInstruments, key: 'instruments' }, { icon: '💃', label: t().freezeDance, run: startFreezeDance, key: 'freezeDance' }]) {
+      grid.append(el('button', { class: 'tile', type: 'button', onpress: () => { stats.playMode(m.key); show((s2) => m.run(s2), { back: musicScreen }); } },
         el('span', { class: 'tile-icon' }, m.icon), el('span', { class: 'tile-label' }, m.label)));
     }
     s.append(grid);
@@ -152,11 +155,87 @@ function creditsView(dlg, back) {
     el('button', { type: 'button', class: 'chip close', onclick: back }, t().back));
 }
 
+// Parent-only statistics: time, which games get played, and progression
+// (discovery + accuracy). Never shown to the child.
+function statsView(dlg, back) {
+  const modeRow = (key, icon, label) => {
+    const n = stats.data().modeCounts[key] || 0;
+    return n ? el('div', { class: 'mode-row' }, `${icon} ${label}: ${n}`) : null;
+  };
+
+  const discoveryRow = (icon, label, seen, total) => {
+    const pct = total ? Math.round((seen / total) * 100) : 0;
+    return el('div', { class: 'discovery-row' },
+      el('span', { class: 'discovery-label' }, `${icon} ${label}`),
+      el('div', { class: 'discovery-bar' }, el('div', { class: 'discovery-fill', style: { width: `${pct}%` } })),
+      el('span', { class: 'discovery-num' }, `${seen}/${total}`));
+  };
+
+  const quizRow = (kind, icon, label) => {
+    const q = stats.data().quiz[kind];
+    if (!q || q.total === 0) return el('div', { class: 'quiz-row' }, `${icon} ${label}: ${t().noRounds}`);
+    const rate = Math.round((q.firstTry / q.total) * 100);
+    let line = `${icon} ${label}: ${rate}% ${t().firstTry} (${q.total} ${t().rounds})`;
+    if (q.recent.length >= 8) {
+      const recentRate = Math.round((q.recent.filter(Boolean).length / q.recent.length) * 100);
+      line += ` · ${t().last(q.recent.length)}: ${recentRate}%`;
+    }
+    return el('div', { class: 'quiz-row' }, line);
+  };
+
+  const draw = () => {
+    const seenWords = stats.data().seenWords;
+    const wordsSeen = CATEGORIES.reduce((sum, c) => sum + (seenWords[c.id] || []).length, 0);
+    const wordsTotal = CATEGORIES.reduce((sum, c) => sum + c.items.length, 0);
+    const soundsTotal = CATEGORIES.find((c) => c.id === 'animals').items.filter((i) => i.cry).length;
+    const bodyTotal = Object.keys(BODY_PARTS).length;
+    const modeRows = [
+      modeRow('explore', '👆', t().explore),
+      modeRow('findit', '🔍', t().findit),
+      modeRow('sounds', '🔊', t().sounds),
+      modeRow('bodyExplore', '👆', `${t().body} · ${t().explore}`),
+      modeRow('bodyFind', '🔍', `${t().body} · ${t().findit}`),
+      modeRow('hide', '🙈', t().hide),
+      modeRow('instruments', '🥁', t().instruments),
+      modeRow('freezeDance', '💃', t().freezeDance),
+      modeRow('drawing', '🖍️', t().draw),
+    ].filter(Boolean);
+
+    dlg.replaceChildren(
+      el('h2', {}, t().statsTitle),
+      el('div', { class: 'stats-view' },
+        el('h3', {}, t().playTime),
+        el('p', { class: 'stats' }, `${t().today}: ${fmt(stats.today())} · ${t().thisWeek}: ${fmt(stats.thisWeek())} · ${t().allTime}: ${fmt(stats.allTime())}`),
+
+        // Nothing played yet: skip the section instead of a heading over an empty gap.
+        ...(modeRows.length ? [el('h3', {}, t().gamesPlayed), el('div', { class: 'mode-list' }, ...modeRows)] : []),
+
+        el('h3', {}, t().discovery),
+        el('div', { class: 'discovery-list' },
+          discoveryRow('🔤', t().words, wordsSeen, wordsTotal),
+          discoveryRow('🖍️', t().drawingsLabel, stats.data().drawingsDone.length, DRAWINGS.length),
+          discoveryRow('🔊', t().soundsLabel, stats.data().seenSounds.length, soundsTotal),
+          discoveryRow('🥁', t().instruments, stats.data().seenInstruments.length, INSTRUMENTS.length),
+          discoveryRow('🧸', t().body, stats.data().seenBodyParts.length, bodyTotal)),
+
+        el('h3', {}, t().accuracy),
+        el('div', { class: 'quiz-list' },
+          quizRow('findit', '🔍', t().findit),
+          quizRow('bodyFind', '🧸', t().body),
+          quizRow('hide', '🙈', t().hide))),
+      el('button', { type: 'button', class: 'chip', onclick: () => { stats.reset(); draw(); } }, `↺ ${t().resetStats}`),
+      el('button', { type: 'button', class: 'chip close', onclick: back }, t().back)
+    );
+  };
+  draw();
+}
+
 function openSettings() {
   const dlg = el('dialog', { class: 'settings' });
   let view = 'main';
   const render = () => {
     if (view === 'credits') return creditsView(dlg, () => { view = 'main'; render(); });
+    if (view === 'stats') return statsView(dlg, () => { view = 'main'; render(); });
     dlg.replaceChildren(
       el('h2', {}, t().settings),
       el('h3', {}, t().language),
@@ -198,7 +277,9 @@ function openSettings() {
         }, String(n)))),
       // Tip for parents when the game runs inside the normal browser (with address bar, tabs...)
       ...(navigator.standalone || matchMedia('(display-mode: standalone)').matches ? [] : [el('p', { class: 'stats' }, t().kidLockTip)]),
-      el('button', { type: 'button', class: 'chip', style: { marginTop: '16px' }, onclick: () => { view = 'credits'; render(); } }, `ℹ️ ${t().credits}`),
+      el('div', { class: 'row', style: { marginTop: '16px' } },
+        el('button', { type: 'button', class: 'chip', onclick: () => { view = 'stats'; render(); } }, `📊 ${t().statsTitle}`),
+        el('button', { type: 'button', class: 'chip', onclick: () => { view = 'credits'; render(); } }, `ℹ️ ${t().credits}`)),
       el('button', {
         type: 'button', class: 'chip close',
         onclick: () => { dlg.close(); dlg.remove(); home(); },
@@ -246,7 +327,8 @@ history.pushState({ kidlearning: true }, '', location.href);
 window.addEventListener('popstate', () => history.pushState({ kidlearning: true }, '', location.href));
 
 loadSettings();
-startPlaytime(() => {
+startPlaytime((active) => {
+  if (active) stats.tickSecond();
   updateTimer();
   const limit = playtime.limit();
   if (limit && playtime.today() >= limit) timesUp();
