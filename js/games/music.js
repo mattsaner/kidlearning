@@ -9,23 +9,33 @@ import { stats } from '../stats.js';
 // learn the name. "Freeze Dance" is the classic toddler activity — dance while the
 // music plays, freeze when it stops — for movement and self-regulation practice.
 
-/** A short synthesized note. `harmonic` (optional) layers a quieter overtone on top. */
-function playTone(ctx, { wave = 'sine', freq = 440, duration = 0.3, attack = 0.005, gain = 0.6, harmonic }) {
+/**
+ * A synthesized sound: one note, or with `notes` a short riff (2-3 notes in a
+ * row) — each entry is `{ at, ratio, duration, gain }`, `at` a delay in seconds
+ * and `ratio` a multiplier on the base `freq`, both optional. `harmonic`
+ * (optional) layers a quieter overtone on every note, for a fuller timbre.
+ */
+function playTone(ctx, { wave = 'sine', freq = 440, duration = 0.3, attack = 0.005, gain = 0.6, harmonic, notes }) {
   const t0 = ctx.currentTime;
-  const ring = (f, g, dur) => {
+  const ring = (start, f, g, dur) => {
     const osc = ctx.createOscillator();
     osc.type = wave;
     osc.frequency.value = f;
     const env = ctx.createGain();
-    env.gain.setValueAtTime(0, t0);
-    env.gain.linearRampToValueAtTime(g, t0 + attack);
-    env.gain.exponentialRampToValueAtTime(0.001, t0 + dur);
+    env.gain.setValueAtTime(0, start);
+    env.gain.linearRampToValueAtTime(g, start + attack);
+    env.gain.exponentialRampToValueAtTime(0.001, start + dur);
     osc.connect(env).connect(ctx.destination);
-    osc.start(t0);
-    osc.stop(t0 + dur + 0.02);
+    osc.start(start);
+    osc.stop(start + dur + 0.02);
   };
-  ring(freq, gain, duration);
-  if (harmonic) ring(freq * harmonic, gain * 0.4, duration * 0.8);
+  const play = (start, f, g, dur) => {
+    ring(start, f, g, dur);
+    if (harmonic) ring(start, f * harmonic, g * 0.4, dur * 0.8);
+  };
+  for (const n of notes?.length ? notes : [{}]) {
+    play(t0 + (n.at ?? 0), freq * (n.ratio ?? 1), n.gain ?? gain, n.duration ?? duration);
+  }
 }
 
 const playIfLoud = (opts) => settings.sound && whenAudioReady((ctx) => playTone(ctx, opts));

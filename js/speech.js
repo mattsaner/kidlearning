@@ -79,7 +79,7 @@ function playSample(url, req, onFail) {
 
 // --- speech
 
-function speakTts(text, req, { rate = 0.8, pitch = 1.15 } = {}) {
+function speakTts(text, req, { rate = 0.72, pitch = 1.15 } = {}) {
   if (!synth) return;
   const u = new SpeechSynthesisUtterance(text);
   u.lang = speechLang();
